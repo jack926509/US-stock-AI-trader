@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.zeabur.app/template.json",
+  "name": "us-stock-ai-trader",
+  "description": "美股 AI 自動化交易系統 — Paper Trading MVP",
+  "services": [
+    {
+      "name": "postgres",
+      "template": "PREBUILT_V2",
+      "spec": { "templateId": "POSTGRESQL" }
+    },
+    {
+      "name": "api",
+      "rootDirectory": "apps/api",
+      "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter @app/api db:generate && pnpm --filter @app/api build",
+      "startCommand": "pnpm --filter @app/api start",
+      "ports": [{ "id": "web", "port": 8080, "type": "HTTP" }]
+    },
+    {
+      "name": "engine",
+      "rootDirectory": "apps/engine",
+      "buildCommand": "pip install -e .",
+      "startCommand": "python -m src.scheduler"
+    },
+    {
+      "name": "dashboard",
+      "rootDirectory": "apps/dashboard",
+      "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter @app/dashboard build",
+      "startCommand": "pnpm --filter @app/dashboard start",
+      "ports": [{ "id": "web", "port": 3000, "type": "HTTP" }]
+    }
+  ]
+}

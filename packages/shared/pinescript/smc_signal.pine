@@ -1,0 +1,200 @@
+//@version=5
+indicator("SMC Signal Engine", overlay=true, max_bars_back=500)
+
+// ═══════════════════════════════════════════════════════════
+// SMC Signal Engine v1.0
+// 功能：BOS / CHoCH / Order Block / FVG / Liquidity Sweep
+// Webhook 格式：JSON → Node.js 後端
+// ═══════════════════════════════════════════════════════════
+
+// ── 參數設定 ──────────────────────────────────────────────
+swing_length    = input.int(10,   "Swing Length（擺動高低點）", minval=3, maxval=50)
+ob_lookback     = input.int(5,    "Order Block 回溯 K 棒數",   minval=1, maxval=20)
+fvg_min_size    = input.float(0.1,"FVG 最小尺寸（%）",         minval=0.01, step=0.01)
+rr_min          = input.float(2.0,"最低 R:R 比例",             minval=1.0,  step=0.1)
+risk_pct        = input.float(1.0,"每筆風險 %（帳戶）",        minval=0.1,  step=0.1)
+
+show_bos        = input.bool(true,  "顯示 BOS")
+show_choch      = input.bool(true,  "顯示 CHoCH")
+show_ob         = input.bool(true,  "顯示 Order Block")
+show_fvg        = input.bool(true,  "顯示 FVG")
+show_liq        = input.bool(true,  "顯示 Liquidity Sweep")
+
+// ── Swing High / Low ─────────────────────────────────────
+swingHigh = ta.pivothigh(high, swing_length, swing_length)
+swingLow  = ta.pivotlow(low,  swing_length, swing_length)
+
+var float lastSwingHigh = na
+var float lastSwingLow  = na
+var float prevSwingHigh = na
+var float prevSwingLow  = na
+
+if not na(swingHigh)
+    prevSwingHigh := lastSwingHigh
+    lastSwingHigh := swingHigh
+
+if not na(swingLow)
+    prevSwingLow := lastSwingLow
+    lastSwingLow := swingLow
+
+// ── BOS（Break of Structure） ────────────────────────────
+// 多頭 BOS：收盤突破上一個擺動高點
+bos_bull = not na(lastSwingHigh) and close > lastSwingHigh and close[1] <= lastSwingHigh
+// 空頭 BOS：收盤跌破上一個擺動低點
+bos_bear = not na(lastSwingLow)  and close < lastSwingLow  and close[1] >= lastSwingLow
+
+// ── CHoCH（Change of Character） ────────────────────────
+// 在下跌趨勢中，突破前一個擺動高點 = 結構反轉
+var bool bearTrend = false
+var bool bullTrend = false
+
+if bos_bear
+    bearTrend := true
+    bullTrend := false
+if bos_bull
+    bullTrend := true
+    bearTrend := false
+
+choch_bull = bearTrend and not na(prevSwingHigh) and close > prevSwingHigh
+choch_bear = bullTrend and not na(prevSwingLow)  and close < prevSwingLow
+
+// ── Order Block ──────────────────────────────────────────
+// 多頭 OB：BOS 前最後一根空頭 K 棒（open > close）
+// 空頭 OB：BOS 前最後一根多頭 K 棒（close > open）
+var float ob_bull_top    = na
+var float ob_bull_bottom = na
+var float ob_bear_top    = na
+var float ob_bear_bottom = na
+
+if bos_bull
+    // 往回找最後一根空頭 K
+    for i = 1 to ob_lookback
+        if open[i] > close[i]
+            ob_bull_top    := high[i]
+            ob_bull_bottom := low[i]
+            break
+
+if bos_bear
+    // 往回找最後一根多頭 K
+    for i = 1 to ob_lookback
+        if close[i] > open[i]
+            ob_bear_top    := high[i]
+            ob_bear_bottom := low[i]
+            break
+
+// OB 回測確認（價格回到 OB 區間）
+ob_bull_test = not na(ob_bull_bottom) and low <= ob_bull_top and low >= ob_bull_bottom
+ob_bear_test = not na(ob_bear_top)   and high >= ob_bear_bottom and high <= ob_bear_top
+
+// ── FVG（Fair Value Gap）────────────────────────────────
+// 多頭 FVG：K[2].high < K[0].low（三根 K 中間留空）
+// 空頭 FVG：K[2].low  > K[0].high
+fvg_bull_size = (low - high[2]) / high[2] * 100
+fvg_bear_size = (low[2] - high) / low[2]  * 100
+
+fvg_bull = high[2] < low  and fvg_bull_size >= fvg_min_size
+fvg_bear = low[2]  > high and fvg_bear_size >= fvg_min_size
+
+var float fvg_bull_top    = na
+var float fvg_bull_bottom = na
+var float fvg_bear_top    = na
+var float fvg_bear_bottom = na
+
+if fvg_bull
+    fvg_bull_top    := low
+    fvg_bull_bottom := high[2]
+
+if fvg_bear
+    fvg_bear_top    := low[2]
+    fvg_bear_bottom := high
+
+// ── Liquidity Sweep ──────────────────────────────────────
+// 價格短暫突破擺動高低點後快速拉回 = 流動性掃除
+liq_sweep_bull = not na(lastSwingLow)  and low < lastSwingLow  and close > lastSwingLow
+liq_sweep_bear = not na(lastSwingHigh) and high > lastSwingHigh and close < lastSwingHigh
+
+// ── 綜合訊號判斷 ─────────────────────────────────────────
+// 做多條件：BOS 多 或 CHoCH 多，配合 OB/FVG 確認
+long_signal  = (bos_bull or choch_bull) and (ob_bull_test or fvg_bull)
+short_signal = (bos_bear or choch_bear) and (ob_bear_test or fvg_bear)
+
+// 流動性掃除後反轉訊號
+long_liq_signal  = liq_sweep_bull
+short_liq_signal = liq_sweep_bear
+
+// ── 視覺化標記 ───────────────────────────────────────────
+// BOS 標記
+if show_bos and bos_bull
+    label.new(bar_index, low,  "BOS ▲", style=label.style_label_up,   color=color.new(color.green, 20), textcolor=color.white, size=size.small)
+if show_bos and bos_bear
+    label.new(bar_index, high, "BOS ▼", style=label.style_label_down, color=color.new(color.red,   20), textcolor=color.white, size=size.small)
+
+// CHoCH 標記
+if show_choch and choch_bull
+    label.new(bar_index, low,  "CHoCH ▲", style=label.style_label_up,   color=color.new(color.lime, 20), textcolor=color.black, size=size.small)
+if show_choch and choch_bear
+    label.new(bar_index, high, "CHoCH ▼", style=label.style_label_down, color=color.new(color.orange, 20), textcolor=color.black, size=size.small)
+
+// Order Block 矩形
+if show_ob and bos_bull and not na(ob_bull_bottom)
+    box.new(bar_index - ob_lookback, ob_bull_top, bar_index + 20, ob_bull_bottom,
+            border_color=color.new(color.green, 40), bgcolor=color.new(color.green, 85))
+if show_ob and bos_bear and not na(ob_bear_top)
+    box.new(bar_index - ob_lookback, ob_bear_top, bar_index + 20, ob_bear_bottom,
+            border_color=color.new(color.red, 40), bgcolor=color.new(color.red, 85))
+
+// FVG 矩形
+if show_fvg and fvg_bull
+    box.new(bar_index - 2, fvg_bull_top, bar_index, fvg_bull_bottom,
+            border_color=color.new(color.aqua, 40), bgcolor=color.new(color.aqua, 85))
+if show_fvg and fvg_bear
+    box.new(bar_index - 2, fvg_bear_top, bar_index, fvg_bear_bottom,
+            border_color=color.new(color.fuchsia, 40), bgcolor=color.new(color.fuchsia, 85))
+
+// Liquidity Sweep
+if show_liq and liq_sweep_bull
+    label.new(bar_index, low,  "LIQ ↑", style=label.style_label_up,   color=color.new(color.teal, 20),   textcolor=color.white, size=size.tiny)
+if show_liq and liq_sweep_bear
+    label.new(bar_index, high, "LIQ ↓", style=label.style_label_down, color=color.new(color.purple, 20), textcolor=color.white, size=size.tiny)
+
+// 綜合訊號標記
+plotshape(long_signal,       title="Long Entry",      location=location.belowbar, style=shape.triangleup,   color=color.new(color.green, 0),  size=size.normal)
+plotshape(short_signal,      title="Short Entry",     location=location.abovebar, style=shape.triangledown, color=color.new(color.red,   0),  size=size.normal)
+plotshape(long_liq_signal,   title="Long Liq Entry",  location=location.belowbar, style=shape.circle,       color=color.new(color.lime,  20), size=size.small)
+plotshape(short_liq_signal,  title="Short Liq Entry", location=location.abovebar, style=shape.circle,       color=color.new(color.orange,20), size=size.small)
+
+// ── Webhook Alert 設定 ───────────────────────────────────
+// 訊號字串（傳給 Node.js 後端用）
+signal_type =
+     long_signal       ? "LONG_SMC"      :
+     short_signal      ? "SHORT_SMC"     :
+     long_liq_signal   ? "LONG_LIQ"      :
+     short_liq_signal  ? "SHORT_LIQ"     : ""
+
+// Alert 觸發條件
+any_signal = long_signal or short_signal or long_liq_signal or short_liq_signal
+
+// ── Alert Message 模板（複製到 TradingView Alert 的 Message 欄）────
+// ⚠️ 必須把 REPLACE_WITH_SECRET 換成 .env 裡 TRADINGVIEW_WEBHOOK_SECRET 的值
+// ⚠️ direction 與 signal_type 由所選 alertcondition 決定，
+//    請對下面 4 條 alertcondition 各建一條 TradingView Alert，
+//    並把 message 欄填上對應的 JSON（範例見下）。
+//
+// 範例（多頭 BOS 入場用，給 SMC Long 這條 alert）：
+// {
+//   "secret":      "REPLACE_WITH_SECRET",
+//   "symbol":      "{{ticker}}",
+//   "timeframe":   "{{interval}}",
+//   "direction":   "long",
+//   "signal_type": "BOS",
+//   "price":       {{close}},
+//   "high":        {{high}},
+//   "low":         {{low}},
+//   "volume":      {{volume}},
+//   "time":        "{{time}}"
+// }
+
+alertcondition(long_signal,      title="SMC Long",      message="long SMC entry")
+alertcondition(short_signal,     title="SMC Short",     message="short SMC entry")
+alertcondition(long_liq_signal,  title="SMC Long LIQ",  message="long liquidity sweep")
+alertcondition(short_liq_signal, title="SMC Short LIQ", message="short liquidity sweep")

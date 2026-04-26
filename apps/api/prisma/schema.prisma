@@ -1,0 +1,143 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────
+// 訊號池：TradingView + Python 雙來源都進這張表
+// ─────────────────────────────────────────────────────────────
+model Signal {
+  id           BigInt   @id @default(autoincrement())
+  source       String
+  symbol       String
+  timeframe    String
+  direction    String
+  signalType   String   @map("signal_type")
+  rawPayload   Json     @map("raw_payload")
+  fingerprint  String
+  receivedAt   DateTime @default(now()) @map("received_at")
+
+  evaluations  ClaudeEvaluation[]
+  decisions    TradeDecision[]
+
+  @@index([symbol, receivedAt(sort: Desc)])
+  @@map("signals")
+}
+
+// ─────────────────────────────────────────────────────────────
+// 訊號去重（60 秒內同 fingerprint 拒收）
+// ─────────────────────────────────────────────────────────────
+model SignalFingerprint {
+  fingerprint String   @id
+  expiresAt   DateTime @map("expires_at")
+
+  @@map("signal_fingerprints")
+}
+
+// ─────────────────────────────────────────────────────────────
+// Claude 評分結果
+// ─────────────────────────────────────────────────────────────
+model ClaudeEvaluation {
+  id            BigInt   @id @default(autoincrement())
+  signalId      BigInt   @map("signal_id")
+  model         String
+  smcStructure  Json     @map("smc_structure")
+  confidence    Int
+  rationale     String?
+  apiCostUsd    Decimal? @map("api_cost_usd") @db.Decimal(10, 6)
+  evaluatedAt   DateTime @default(now()) @map("evaluated_at")
+
+  signal        Signal           @relation(fields: [signalId], references: [id])
+  decisions     TradeDecision[]
+
+  @@map("claude_evaluations")
+}
+
+// ─────────────────────────────────────────────────────────────
+// 風控判斷與下單決策
+// ─────────────────────────────────────────────────────────────
+model TradeDecision {
+  id              BigInt   @id @default(autoincrement())
+  signalId        BigInt   @map("signal_id")
+  evaluationId    BigInt?  @map("evaluation_id")
+  decision        String   // "PLACED" | "REJECTED"
+  rejectReason    String?  @map("reject_reason")
+  positionQty     Int?     @map("position_qty")
+  entryPrice      Decimal? @map("entry_price") @db.Decimal(12, 4)
+  stopLoss        Decimal? @map("stop_loss") @db.Decimal(12, 4)
+  takeProfit      Decimal? @map("take_profit") @db.Decimal(12, 4)
+  rrRatio         Decimal? @map("rr_ratio") @db.Decimal(6, 2)
+  kellyFraction   Decimal? @map("kelly_fraction") @db.Decimal(6, 4)
+  decidedAt       DateTime @default(now()) @map("decided_at")
+
+  signal          Signal           @relation(fields: [signalId], references: [id])
+  evaluation      ClaudeEvaluation? @relation(fields: [evaluationId], references: [id])
+  orders          Order[]
+
+  @@map("trade_decisions")
+}
+
+// ─────────────────────────────────────────────────────────────
+// Alpaca 訂單與成交
+// ─────────────────────────────────────────────────────────────
+model Order {
+  id              BigInt   @id @default(autoincrement())
+  decisionId      BigInt   @map("decision_id")
+  alpacaOrderId   String   @unique @map("alpaca_order_id")
+  symbol          String
+  side            String
+  qty             Int
+  orderType       String   @map("order_type")
+  status          String
+  filledAvgPrice  Decimal? @map("filled_avg_price") @db.Decimal(12, 4)
+  submittedAt     DateTime @map("submitted_at")
+  filledAt        DateTime? @map("filled_at")
+
+  decision        TradeDecision @relation(fields: [decisionId], references: [id])
+  entryFor        Position[] @relation("EntryOrder")
+  exitFor         Position[] @relation("ExitOrder")
+
+  @@map("orders")
+}
+
+// ─────────────────────────────────────────────────────────────
+// 持倉狀態（Alpaca 為唯一真實來源，這張表是 cache + P&L）
+// ─────────────────────────────────────────────────────────────
+model Position {
+  id            BigInt   @id @default(autoincrement())
+  symbol        String
+  entryOrderId  BigInt   @map("entry_order_id")
+  exitOrderId   BigInt?  @map("exit_order_id")
+  qty           Int
+  entryPrice    Decimal  @map("entry_price") @db.Decimal(12, 4)
+  exitPrice     Decimal? @map("exit_price") @db.Decimal(12, 4)
+  status        String   // "open" | "closed"
+  pnlUsd        Decimal? @map("pnl_usd") @db.Decimal(12, 4)
+  openedAt      DateTime @map("opened_at")
+  closedAt      DateTime? @map("closed_at")
+
+  entryOrder    Order    @relation("EntryOrder", fields: [entryOrderId], references: [id])
+  exitOrder     Order?   @relation("ExitOrder", fields: [exitOrderId], references: [id])
+
+  @@index([symbol, status])
+  @@map("positions")
+}
+
+// ─────────────────────────────────────────────────────────────
+// 每日 P&L 快照（每日收盤後 cron 寫入）
+// ─────────────────────────────────────────────────────────────
+model DailyPnl {
+  tradeDate      DateTime @id @db.Date @map("trade_date")
+  realizedPnl    Decimal  @map("realized_pnl") @db.Decimal(12, 4)
+  unrealizedPnl  Decimal  @map("unrealized_pnl") @db.Decimal(12, 4)
+  tradesCount    Int      @map("trades_count")
+  winCount       Int      @map("win_count")
+  lossCount      Int      @map("loss_count")
+  accountEquity  Decimal  @map("account_equity") @db.Decimal(12, 4)
+
+  @@map("daily_pnl")
+}

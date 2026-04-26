@@ -1,0 +1,10 @@
+{
+  "name": "@app/engine",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "python -m src.scheduler",
+    "install:py": "pip install -e .",
+    "test": "pytest"
+  }
+}
