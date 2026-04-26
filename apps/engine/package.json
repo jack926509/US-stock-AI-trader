@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "python -m src.scheduler",
-    "install:py": "pip install -e .",
-    "test": "pytest"
+    "dev": ".venv/bin/python -m src.scheduler",
+    "install:py": "uv venv --python 3.11 --seed && uv pip install -e .",
+    "test": ".venv/bin/pytest"
   }
 }

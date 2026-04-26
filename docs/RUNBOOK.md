@@ -85,7 +85,7 @@ pnpm dev
 這會並行跑：
 - `apps/api`：Express on `http://localhost:8080`
 - `apps/engine`：Python APScheduler，每 5 分鐘印一條 `scan_pool tick` log（會立即先跑一次）
-- `apps/dashboard`：Next.js on `http://localhost:3000`
+- `apps/dashboard`：Next.js on `http://localhost:3030`
 
 ---
 
@@ -121,7 +121,7 @@ curl -X POST http://localhost:8080/internal/python-signal \
 ```
 
 ### ✅ 5.5 Dashboard 開啟
-瀏覽器打開 <http://localhost:3000>，應看到首頁 + 四個頁籤連結。
+瀏覽器打開 <http://localhost:3030>，應看到首頁 + 四個頁籤連結。
 
 ### ✅ 5.6 Telegram 推送
 ```bash
