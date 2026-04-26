@@ -10,8 +10,7 @@
     },
     {
       "name": "api",
-      "rootDirectory": "apps/api",
-      "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter @app/api db:generate && pnpm --filter @app/api build",
+      "buildCommand": "corepack enable && pnpm install --frozen-lockfile && pnpm --filter @app/api db:generate && pnpm --filter @app/api db:deploy && pnpm --filter @app/api build",
       "startCommand": "pnpm --filter @app/api start",
       "ports": [{ "id": "web", "port": 8080, "type": "HTTP" }]
     },
@@ -23,8 +22,7 @@
     },
     {
       "name": "dashboard",
-      "rootDirectory": "apps/dashboard",
-      "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter @app/dashboard build",
+      "buildCommand": "corepack enable && pnpm install --frozen-lockfile && pnpm --filter @app/dashboard build",
       "startCommand": "pnpm --filter @app/dashboard start",
       "ports": [{ "id": "web", "port": 3000, "type": "HTTP" }]
     }

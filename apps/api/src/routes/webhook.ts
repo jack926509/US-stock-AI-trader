@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { logger } from "../lib/logger.js";
 
-export const webhookRouter = Router();
+export const webhookRouter: Router = Router();
 
 // Phase 1 將實作：secret 驗證、SHA256 fingerprint 去重、寫入 signals
 webhookRouter.post("/tv", (req, res) => {

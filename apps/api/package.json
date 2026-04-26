@@ -9,6 +9,7 @@
     "start": "node dist/index.js",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
     "db:studio": "prisma studio",
     "test:telegram": "tsx src/scripts/test-telegram.ts",
     "lint": "eslint src --ext .ts",
@@ -18,12 +19,14 @@
     "@anthropic-ai/sdk": "^0.30.0",
     "@app/shared": "workspace:*",
     "@prisma/client": "^5.20.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.0",
     "express": "^4.21.0",
     "pino": "^9.4.0",
     "pino-pretty": "^11.2.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.0",
     "@types/node": "^20.16.0",
     "prisma": "^5.20.0",

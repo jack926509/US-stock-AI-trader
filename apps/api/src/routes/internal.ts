@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { logger } from "../lib/logger.js";
 
-export const internalRouter = Router();
+export const internalRouter: Router = Router();
 
 // Phase 1 將實作：INTERNAL_API_TOKEN 驗證、寫入 signals
 internalRouter.post("/python-signal", (req, res) => {
