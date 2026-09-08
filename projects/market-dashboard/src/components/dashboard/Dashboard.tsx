@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useSyncExternalStore } from "react"
+import { useEffect, useMemo } from "react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { TickerBar } from "@/components/design/TickerBar"
 import { CommandLine } from "@/components/design/CommandLine"
@@ -8,20 +8,22 @@ import { Navbar } from "./Navbar"
 import { IndicesStrip } from "./IndicesStrip"
 import { SidePanel } from "./SidePanel"
 import { WatchlistTable } from "./WatchlistTable"
-import {
-  getServerSnapshot,
-  getSnapshot,
-  parseWatchlist,
-  subscribe,
-} from "@/lib/watchlist"
+import { clearLegacyWatchlist, getWatchlist, migrateLegacyWatchlist, readLegacyWatchlist } from "@/lib/watchlist"
+import { MarketOverview } from "./MarketOverview"
 import type { Quote, WatchlistItem } from "@/types"
 
 type WatchlistEntry = WatchlistItem & { quote: Quote | null }
 
 export function Dashboard() {
   const queryClient = useQueryClient()
-  const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-  const watchlist = useMemo(() => parseWatchlist(snapshot), [snapshot])
+  const { data: watchlist = [], isPending: watchlistLoading, isError: watchlistError, isSuccess: watchlistSuccess } = useQuery<WatchlistItem[]>({ queryKey: ["watchlist"], queryFn: getWatchlist, staleTime: Infinity })
+  useEffect(() => {
+    const legacy = readLegacyWatchlist()
+    if (!legacy || !watchlistSuccess || watchlist.length > 0 || watchlistLoading) return
+    migrateLegacyWatchlist(legacy).then((saved) => {
+      clearLegacyWatchlist(); queryClient.setQueryData(["watchlist"], saved)
+    }).catch(() => undefined)
+  }, [queryClient, watchlist.length, watchlistLoading, watchlistSuccess])
   const symbols = useMemo(() => watchlist.map((w) => w.symbol), [watchlist])
   // sort 讓 watchlist 順序變動但內容相同時不觸發新 query（穩定 cache key）
   const symbolKey = useMemo(() => [...symbols].sort().join(","), [symbols])
@@ -57,10 +59,11 @@ export function Dashboard() {
 
       <main className="flex-1 px-4 pb-12 pt-3.5 sm:px-8">
         <IndicesStrip />
+        <MarketOverview />
 
         <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-[1fr_360px]">
           <div className="flex flex-col gap-5">
-            <WatchlistTable data={data} isLoading={isLoading} isError={isError} />
+            <WatchlistTable data={data} isLoading={watchlistLoading || isLoading} isError={watchlistError || isError} />
           </div>
           <aside className="flex flex-col gap-5">
             <SidePanel data={data} />

@@ -39,7 +39,7 @@ const notoSerifTC = Noto_Serif_TC({
 
 export const metadata: Metadata = {
   title: "US Stock Analyzer",
-  description: "美股分析系統 — 財報、AI 分析、華爾街視角",
+  description: "美股研究系統 — 市場總覽、個股資料與可解釋策略掃描",
 }
 
 export default function RootLayout({

@@ -43,6 +43,7 @@ yarn-error.log*
 *.db
 *.db-shm
 *.db-wal
+/.local-data/
 
 # typescript
 *.tsbuildinfo

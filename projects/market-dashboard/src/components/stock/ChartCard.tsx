@@ -15,7 +15,7 @@ function f2(v: number | null | undefined): string {
 }
 
 export function ChartCard({ tvSymbol, quote }: Props) {
-  const vwap =
+  const typicalPrice =
     quote && quote.dayHigh && quote.dayLow && quote.price
       ? (quote.dayHigh + quote.dayLow + quote.price) / 3
       : null
@@ -46,7 +46,7 @@ export function ChartCard({ tvSymbol, quote }: Props) {
           ["HIGH", f2(quote?.dayHigh)],
           ["LOW", f2(quote?.dayLow)],
           ["CLOSE", f2(quote?.price)],
-          ["VWAP", f2(vwap)],
+          ["TYPICAL", f2(typicalPrice)],
           ["52W H", f2(quote?.yearHigh)],
           ["52W L", f2(quote?.yearLow)],
         ].map(([l, v]) => (

@@ -1,14 +1,14 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { AlertCircle, Trash2 } from "lucide-react"
 import { LogoTile } from "@/components/design/LogoTile"
-import { Sparkline } from "@/components/design/Sparkline"
 import { SectionHeader } from "@/components/design/SectionHeader"
-import { fmtCap, changeColor, makeSpark } from "@/lib/format"
-import { getWatchlist, setWatchlist } from "@/lib/watchlist"
+import { fmtCap, changeColor } from "@/lib/format"
+import { addWatchlistItem, removeWatchlistItem } from "@/lib/watchlist"
 import type { Quote, WatchlistItem } from "@/types"
 
 type WatchlistEntry = WatchlistItem & { quote: Quote | null }
@@ -28,6 +28,7 @@ const SECTOR_FILTERS = [
 ] as const
 
 export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionProps) {
+  const queryClient = useQueryClient()
   const router = useRouter()
   const [filter, setFilter] = useState<(typeof SECTOR_FILTERS)[number]["id"]>("all")
 
@@ -38,13 +39,14 @@ export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionPro
     )
   }, [data, filter])
 
-  function handleDelete(e: React.MouseEvent, symbol: string) {
+  async function handleDelete(e: React.MouseEvent, symbol: string) {
     e.stopPropagation()
-    const prev = getWatchlist()
-    setWatchlist(prev.filter((w) => w.symbol !== symbol))
-    toast.success(`已移除 ${symbol}`, {
-      action: { label: "復原", onClick: () => setWatchlist(prev) },
-    })
+    try {
+      const removed = data.find((item) => item.symbol === symbol)
+      const saved = await removeWatchlistItem(symbol)
+      queryClient.setQueryData(["watchlist"], saved)
+      toast.success(`已移除 ${symbol}`, { action: { label: "復原", onClick: () => { if (removed) void addWatchlistItem(removed).then((items) => queryClient.setQueryData(["watchlist"], items)) } } })
+    } catch (error) { toast.error(error instanceof Error ? error.message : "移除失敗") }
   }
 
   if (isLoading) {
@@ -134,12 +136,8 @@ export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionPro
           const pct = q?.changePercentage ?? 0
           const up = pct >= 0
           const color = changeColor(pct)
-          const points = makeSpark(
-            [...row.symbol].reduce((a, c) => a + c.charCodeAt(0), 0),
-            pct
-          )
-          const range = q ? q.yearHigh - q.yearLow : 0
-          const pos = q && range > 0 ? Math.max(0, Math.min(1, (q.price - q.yearLow) / range)) : 0.5
+          const range = q?.yearHigh != null && q.yearLow != null ? q.yearHigh - q.yearLow : 0
+          const pos = q && q.yearLow != null && range > 0 ? Math.max(0, Math.min(1, (q.price - q.yearLow) / range)) : 0.5
           return (
             <div
               key={row.symbol}
@@ -172,9 +170,7 @@ export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionPro
               >
                 {q ? `${q.change >= 0 ? "+" : ""}${q.change.toFixed(2)}` : "—"}
               </span>
-              <div className="flex justify-end">
-                <Sparkline points={points} color={color} width={100} height={22} fill />
-              </div>
+              <div className="text-right font-mono text-[9px] text-muted-foreground">{q?.asOf ?? "無日線"}</div>
               <span className="text-muted-foreground text-right font-mono text-[11px]">
                 {fmtCap(q?.marketCap ?? null)}
               </span>
@@ -193,11 +189,12 @@ export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionPro
                   />
                 </div>
                 <div className="text-muted-foreground mt-1 flex justify-between font-mono text-[9px]">
-                  <span>{q?.yearLow.toFixed(0) ?? "—"}</span>
-                  <span>{q?.yearHigh.toFixed(0) ?? "—"}</span>
+                  <span>{q?.yearLow?.toFixed(0) ?? "—"}</span>
+                  <span>{q?.yearHigh?.toFixed(0) ?? "—"}</span>
                 </div>
               </div>
               <span className="text-right">
+                {q ? (
                 <span
                   className="inline-block min-w-[52px] rounded px-1.5 py-1 text-center font-mono text-[11px] font-bold text-white"
                   style={{ background: color }}
@@ -205,6 +202,7 @@ export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionPro
                   {up ? "+" : ""}
                   {pct.toFixed(2)}
                 </span>
+                ) : <span className="text-muted-foreground">—</span>}
               </span>
               <button
                 onClick={(e) => handleDelete(e, row.symbol)}
@@ -225,10 +223,6 @@ export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionPro
           const pct = q?.changePercentage ?? 0
           const up = pct >= 0
           const color = changeColor(pct)
-          const points = makeSpark(
-            [...row.symbol].reduce((a, c) => a + c.charCodeAt(0), 0),
-            pct
-          )
           return (
             <div key={row.symbol} className="hover:bg-paper px-4 py-3">
               <button
@@ -246,14 +240,14 @@ export function WatchlistTable({ data, isLoading, isError }: WatchlistSectionPro
                   <div className="text-muted-foreground truncate text-[11px]">{row.name}</div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Sparkline points={points} color={color} width={56} height={20} />
-                  <span
+                  <span className="font-mono text-[9px] text-muted-foreground">{q?.asOf ?? "無日線"}</span>
+                  {q ? <span
                     className="rounded px-1.5 py-0.5 font-mono text-[11px] font-bold text-white tabular-nums"
                     style={{ background: color }}
                   >
                     {up ? "+" : ""}
                     {pct.toFixed(2)}
-                  </span>
+                  </span> : <span className="text-muted-foreground">—</span>}
                 </div>
               </button>
               <div className="mt-1.5 flex justify-end">

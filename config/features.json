@@ -1,10 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "auditedAt": "2026-09-08",
-  "scope": "Latest source main snapshots; source preservation, not runtime acceptance",
+  "scope": "Source preservation plus local dashboard implementation; live market-data acceptance remains pending",
   "statuses": {
-    "preserved": "實作已保留，尚未從整合入口啟動",
-    "deferred": "程式已保留，AI／通知相關流程暫不啟用",
+    "available-local": "可由根目錄本機入口使用；外部行情仍受資料來源與金鑰限制",
+    "preserved": "來源實作已保留，尚未由整合入口提供",
+    "deferred": "來源程式已保留，但此版本未啟用",
+    "disabled": "整合入口明確停用",
     "historical": "原來源已移除的歷史存檔，非現行功能",
     "placeholder": "原來源待實作框架，不能算已完成"
   },
@@ -131,60 +133,69 @@
       ]
     },
     {
-      "id": "dashboard",
-      "name": "市場與自選股看板、個股頁",
+      "id": "unified-market-data",
+      "name": "共用行情資料層",
       "project": "market-dashboard",
-      "status": "preserved",
+      "status": "available-local",
       "evidence": [
-        "projects/market-dashboard/src/app/page.tsx",
-        "projects/market-dashboard/src/app/stock/[symbol]/page.tsx",
-        "projects/market-dashboard/src/components/dashboard/Dashboard.tsx",
-        "projects/market-dashboard/src/components/stock/StockDetailView.tsx"
+        "projects/market-dashboard/src/lib/market-data.ts",
+        "projects/market-dashboard/src/lib/data-service.ts",
+        "projects/market-dashboard/src/app/api/stocks/route.ts",
+        "projects/market-dashboard/src/app/api/market/route.ts"
       ]
     },
     {
-      "id": "dashboard-api",
-      "name": "行情搜尋、財務、同業與新聞 API",
+      "id": "local-watchlist",
+      "name": "本機 JSON 自選股與舊版匯入",
       "project": "market-dashboard",
-      "status": "preserved",
+      "status": "available-local",
       "evidence": [
-        "projects/market-dashboard/src/lib/api/finnhub.ts",
-        "projects/market-dashboard/src/app/api/stocks/route.ts",
-        "projects/market-dashboard/src/app/api/stocks/search/route.ts",
+        "projects/market-dashboard/src/lib/watchlist-store.ts",
+        "projects/market-dashboard/src/lib/watchlist.ts",
+        "projects/market-dashboard/src/app/api/watchlist/route.ts",
+        "projects/market-dashboard/src/components/settings/SettingsView.tsx"
+      ]
+    },
+    {
+      "id": "market-overview",
+      "name": "已收盤日線市場總覽",
+      "project": "market-dashboard",
+      "status": "available-local",
+      "evidence": [
+        "projects/market-dashboard/src/app/api/overview/route.ts",
+        "projects/market-dashboard/src/components/dashboard/MarketOverview.tsx"
+      ]
+    },
+    {
+      "id": "stock-research-view",
+      "name": "個股行情、財務、同業、新聞與財報日期研究頁",
+      "project": "market-dashboard",
+      "status": "available-local",
+      "evidence": [
+        "projects/market-dashboard/src/app/stock/[symbol]/page.tsx",
+        "projects/market-dashboard/src/components/stock/StockDetailView.tsx",
         "projects/market-dashboard/src/app/api/financials/[symbol]/route.ts",
         "projects/market-dashboard/src/app/api/peers/[symbol]/route.ts",
         "projects/market-dashboard/src/app/api/news/[symbol]/route.ts"
       ]
     },
     {
-      "id": "dashboard-briefing",
-      "name": "每日簡報、異動榜與圖表",
+      "id": "deterministic-strategies",
+      "name": "無 AI 的確定性策略掃描",
       "project": "market-dashboard",
-      "status": "preserved",
+      "status": "available-local",
       "evidence": [
-        "projects/market-dashboard/src/components/briefing/BriefingView.tsx",
-        "projects/market-dashboard/src/components/movers/MoversView.tsx",
-        "projects/market-dashboard/src/components/charts/TradingViewWidget.tsx"
-      ]
-    },
-    {
-      "id": "dashboard-storage",
-      "name": "瀏覽器自選股、分析紀錄及備份匯入／匯出",
-      "project": "market-dashboard",
-      "status": "preserved",
-      "evidence": [
-        "projects/market-dashboard/src/lib/watchlist.ts",
-        "projects/market-dashboard/src/lib/analysisHistory.ts",
-        "projects/market-dashboard/src/components/settings/SettingsView.tsx"
+        "projects/market-dashboard/src/lib/strategies.ts",
+        "projects/market-dashboard/src/app/api/strategies/route.ts",
+        "projects/market-dashboard/src/components/strategies/StrategyScanner.tsx"
       ]
     },
     {
       "id": "dashboard-ai",
-      "name": "個股 AI 分析及串流",
+      "name": "個股 AI 分析 API",
       "project": "market-dashboard",
-      "status": "deferred",
+      "status": "disabled",
       "evidence": [
-        "projects/market-dashboard/src/lib/analysis.ts",
         "projects/market-dashboard/src/app/api/analysis/[symbol]/route.ts"
       ]
     },

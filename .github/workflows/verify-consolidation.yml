@@ -1,4 +1,4 @@
-name: Verify source consolidation
+name: Verify consolidation
 on:
   push:
     branches: [main]
@@ -13,6 +13,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm run verify
-      - run: npm run status
-      - run: npm run features
+          cache: npm
+          cache-dependency-path: projects/market-dashboard/package-lock.json
+      - name: Install dashboard dependencies
+        run: npm --prefix projects/market-dashboard ci
+      - name: Test dashboard
+        run: npm --prefix projects/market-dashboard test
+      - name: Build dashboard
+        run: npm --prefix projects/market-dashboard run build
+      - name: Verify immutable baseline and tracked changes
+        run: node scripts/verify-sources.mjs
+      - name: Verify feature evidence
+        run: node scripts/features.mjs

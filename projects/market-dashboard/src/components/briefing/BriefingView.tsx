@@ -1,19 +1,14 @@
 "use client"
 
-import { useMemo, useSyncExternalStore } from "react"
+import { useMemo } from "react"
 import Link from "next/link"
 import { useQueries, useQuery } from "@tanstack/react-query"
 import { ArrowDownRight, ArrowUpRight, Loader2, Newspaper, Sun } from "lucide-react"
 import { TickerBar } from "@/components/design/TickerBar"
 import { Navbar } from "@/components/dashboard/Navbar"
 import { SectionHeader } from "@/components/design/SectionHeader"
-import {
-  getServerSnapshot as getWatchServer,
-  getSnapshot as getWatchSnap,
-  parseWatchlist,
-  subscribe as subscribeWatch,
-} from "@/lib/watchlist"
-import type { Quote } from "@/types"
+import { getWatchlist } from "@/lib/watchlist"
+import type { Quote, WatchlistItem } from "@/types"
 
 interface NewsItemDTO {
   id: number
@@ -32,8 +27,7 @@ export function BriefingView() {
     weekday: "long",
   })
 
-  const watchSnap = useSyncExternalStore(subscribeWatch, getWatchSnap, getWatchServer)
-  const watchlist = useMemo(() => parseWatchlist(watchSnap), [watchSnap])
+  const { data: watchlist = [] } = useQuery<WatchlistItem[]>({ queryKey: ["watchlist"], queryFn: getWatchlist, staleTime: Infinity })
   const watchSymbols = useMemo(() => watchlist.map((w) => w.symbol), [watchlist])
 
   const { data: watchQuotes = [], isLoading: quotesLoading } = useQuery<Quote[]>({

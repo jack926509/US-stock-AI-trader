@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { Search, Plus, Loader2 } from "lucide-react"
 import {
@@ -14,32 +15,31 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { LogoTile } from "@/components/design/LogoTile"
-import { addToWatchlist, getWatchlist } from "@/lib/watchlist"
+import { addWatchlistItem, getWatchlist } from "@/lib/watchlist"
 import { useSymbolSearch, type SearchResult } from "@/hooks/useSymbolSearch"
 
 export function AddStockDialog() {
+  const queryClient = useQueryClient()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState("")
   const { results, searching } = useSymbolSearch(query, { debounceMs: 400 })
 
-  useEffect(() => {
-    if (!open) setQuery("")
-  }, [open])
-
-  function handleAdd(item: SearchResult) {
+  async function handleAdd(item: SearchResult) {
     const upper = item.symbol.toUpperCase()
-    if (getWatchlist().some((w) => w.symbol === upper)) {
+    const current = await getWatchlist()
+    if (current.some((w) => w.symbol === upper)) {
       toast.warning(`${upper} 已在追蹤清單中`)
       return
     }
     // sector 由後續 quote/profile 回流時補；先快速加入，不擋 UX
-    addToWatchlist({ symbol: upper, name: item.name, logo: item.logo ?? null, sector: null })
-    toast.success(`已加入追蹤：${upper}`)
-    setOpen(false)
+    try {
+      const saved = await addWatchlistItem({ symbol: upper, name: item.name, logo: item.logo ?? null, sector: null })
+      queryClient.setQueryData(["watchlist"], saved); toast.success(`已加入追蹤：${upper}`); setOpen(false)
+    } catch (error) { toast.error(error instanceof Error ? error.message : "儲存失敗") }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(next) => { setOpen(next); if (!next) setQuery("") }}>
       <DialogTrigger
         render={<Button size="sm" className="gap-1.5 bg-[#CC785C] text-white hover:bg-[#B8674F]" />}
       >

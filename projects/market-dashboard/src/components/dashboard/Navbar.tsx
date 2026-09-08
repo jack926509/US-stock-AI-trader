@@ -54,8 +54,8 @@ export function Navbar({ onRefresh, isRefreshing, breadcrumb }: NavbarProps) {
       <nav className="hidden items-center gap-1 md:flex">
         {[
           { href: "/", label: "儀表板" },
-          { href: "/briefing", label: "簡報" },
-          { href: "/movers", label: "Movers" },
+          { href: "/briefing", label: "市場簡報" },
+          { href: "/strategies", label: "策略掃描" },
           { href: "/settings", label: "設定" },
         ].map((l) => (
           <Link
@@ -71,7 +71,7 @@ export function Navbar({ onRefresh, isRefreshing, breadcrumb }: NavbarProps) {
       <div className="ml-auto flex items-center gap-3">
         <span className="hidden items-center gap-1.5 rounded-md border border-hair bg-card px-3 py-1.5 font-mono text-[11px] font-semibold sm:flex">
           <span className="size-1.5 rounded-full bg-up shadow-[0_0_6px] shadow-up" />
-          已連線 · 60S
+          資料狀態可追溯
         </span>
         {onRefresh && (
           <button

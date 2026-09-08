@@ -11,6 +11,8 @@ interface StockHeaderProps {
   price?: number
   changePercentage?: number
   change?: number
+  asOf?: string | null
+  source?: string
 }
 
 export function StockHeader({
@@ -19,12 +21,14 @@ export function StockHeader({
   price,
   changePercentage,
   change,
+  asOf,
+  source,
 }: StockHeaderProps) {
-  const displayPrice = price ?? profile?.price ?? 0
-  const displayChange = change ?? profile?.change ?? 0
-  const displayChangePct = changePercentage ?? profile?.changePercentage ?? 0
-  const up = displayChangePct >= 0
-  const color = changeColor(displayChangePct)
+  const displayPrice = price ?? profile?.price
+  const displayChange = change ?? profile?.change
+  const displayChangePct = changePercentage ?? profile?.changePercentage
+  const up = (displayChangePct ?? 0) >= 0
+  const color = changeColor(displayChangePct ?? 0)
 
   const metaLine = [profile?.country ?? "US", profile?.exchange, profile?.sector, profile?.industry]
     .filter(Boolean)
@@ -73,24 +77,26 @@ export function StockHeader({
                     className="font-mono text-[44px] leading-[0.95] font-bold tabular-nums sm:text-[56px]"
                     style={{ letterSpacing: "-0.03em" }}
                   >
-                    {displayPrice.toFixed(2)}
+                    {displayPrice != null && displayPrice > 0 ? displayPrice.toFixed(2) : "—"}
                   </span>
                 </div>
                 <div className="text-muted-foreground mt-1 font-mono text-[11px]">
-                  LAST · UPDATED 60S
+                  {source ?? "行情未取得"} · {asOf ?? "無時間"}
                 </div>
               </div>
 
               {/* Change pill */}
               <div>
+                {displayChangePct == null ? <div className="rounded-md border border-hair px-3 py-1.5 text-xs text-muted-foreground">漲跌資料未取得</div> : <>
                 <div
                   className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 font-mono text-base font-bold text-white"
                   style={{ background: color }}
                 >
-                  {up ? "▲" : "▼"} {displayChange >= 0 ? "+" : ""}
-                  {displayChange.toFixed(2)} {displayChangePct >= 0 ? "+" : ""}
-                  {displayChangePct.toFixed(2)}%
+                  {up ? "▲" : "▼"} {(displayChange ?? 0) >= 0 ? "+" : ""}
+                  {(displayChange ?? 0).toFixed(2)} {(displayChangePct ?? 0) >= 0 ? "+" : ""}
+                  {(displayChangePct ?? 0).toFixed(2)}%
                 </div>
+                </>}
                 {profile?.marketCap ? (
                   <div className="text-muted-foreground mt-1 font-mono text-[11px]">
                     MCAP {fmtCap(profile.marketCap)}
