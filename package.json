@@ -8,6 +8,7 @@
     "start": "node scripts/project-status.mjs",
     "dev": "node scripts/project-status.mjs",
     "status": "node scripts/project-status.mjs",
+    "features": "node scripts/features.mjs",
     "verify": "node scripts/verify-sources.mjs",
     "test": "node scripts/verify-sources.mjs"
   }
