@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "auditedAt": "2026-09-08",
+  "scope": "Latest source main snapshots; source preservation, not runtime acceptance",
+  "statuses": {
+    "preserved": "實作已保留，尚未從整合入口啟動",
+    "deferred": "程式已保留，AI／通知相關流程暫不啟用",
+    "historical": "原來源已移除的歷史存檔，非現行功能",
+    "placeholder": "原來源待實作框架，不能算已完成"
+  },
+  "features": [
+    {
+      "id": "market-data",
+      "name": "市場行情與產業股票池",
+      "project": "market-report",
+      "status": "preserved",
+      "evidence": [
+        "projects/market-report/index.js"
+      ]
+    },
+    {
+      "id": "market-breadth",
+      "name": "市場廣度、產業排行、SMA／RSI／布林通道",
+      "project": "market-report",
+      "status": "preserved",
+      "evidence": [
+        "projects/market-report/index.js"
+      ]
+    },
+    {
+      "id": "daily-flash",
+      "name": "市場日報、新聞快訊與交易日快照",
+      "project": "market-report",
+      "status": "deferred",
+      "evidence": [
+        "projects/market-report/index.js",
+        "projects/market-report/agents/perplexity.js"
+      ]
+    },
+    {
+      "id": "value-rules",
+      "name": "基本面、Buffett、Graham 規則",
+      "project": "market-report",
+      "status": "preserved",
+      "evidence": [
+        "projects/market-report/agents/fundamentals.js",
+        "projects/market-report/agents/buffett.js",
+        "projects/market-report/agents/graham.js",
+        "projects/market-report/agents/fmp.js"
+      ]
+    },
+    {
+      "id": "research-data",
+      "name": "報價、基本面、歷史價格與技術資料擷取",
+      "project": "stock-research",
+      "status": "preserved",
+      "evidence": [
+        "projects/stock-research/fetchers/finnhub_fetcher.py",
+        "projects/stock-research/fetchers/fmp_fetcher.py",
+        "projects/stock-research/fetchers/stooq_fetcher.py",
+        "projects/stock-research/fetchers/tradingview_fetcher.py"
+      ]
+    },
+    {
+      "id": "research-context",
+      "name": "同業、分析師、內部人、EPS、總經與新聞",
+      "project": "stock-research",
+      "status": "preserved",
+      "evidence": [
+        "projects/stock-research/fetchers/peer_fetcher.py",
+        "projects/stock-research/fetchers/analyst_fetcher.py",
+        "projects/stock-research/fetchers/insider_fetcher.py",
+        "projects/stock-research/fetchers/earnings_surprise_fetcher.py",
+        "projects/stock-research/fetchers/macro_fetcher.py",
+        "projects/stock-research/fetchers/tavily_fetcher.py"
+      ]
+    },
+    {
+      "id": "rule-signals",
+      "name": "12 維量化訊號與歷史／相對強弱",
+      "project": "stock-research",
+      "status": "preserved",
+      "evidence": [
+        "projects/stock-research/utils/signals.py",
+        "projects/stock-research/fetchers/history_fetcher.py"
+      ]
+    },
+    {
+      "id": "filings",
+      "name": "SEC 10-K／10-Q 擷取與財報分析管線",
+      "project": "stock-research",
+      "status": "deferred",
+      "evidence": [
+        "projects/stock-research/tenk/data_fetcher.py",
+        "projects/stock-research/tenk/pipeline.py",
+        "projects/stock-research/tenk/orchestrator.py",
+        "projects/stock-research/tenk/report_writer.py",
+        "projects/stock-research/tenk/LICENSE"
+      ]
+    },
+    {
+      "id": "research-ai",
+      "name": "個股 AI 報告與日報寫作",
+      "project": "stock-research",
+      "status": "deferred",
+      "evidence": [
+        "projects/stock-research/analyzer/llm_analyzer.py",
+        "projects/stock-research/app/pipeline.py",
+        "projects/stock-research/app/ai/writer.py"
+      ]
+    },
+    {
+      "id": "research-storage",
+      "name": "自選股、查詢紀錄、財報快取與配額",
+      "project": "stock-research",
+      "status": "preserved",
+      "evidence": [
+        "projects/stock-research/utils/database.py",
+        "projects/stock-research/utils/cache.py",
+        "projects/stock-research/utils/rate_limiter.py"
+      ]
+    },
+    {
+      "id": "research-chart",
+      "name": "K 線圖與報告格式",
+      "project": "stock-research",
+      "status": "preserved",
+      "evidence": [
+        "projects/stock-research/utils/chart.py",
+        "projects/stock-research/utils/formatter.py"
+      ]
+    },
+    {
+      "id": "dashboard",
+      "name": "市場與自選股看板、個股頁",
+      "project": "market-dashboard",
+      "status": "preserved",
+      "evidence": [
+        "projects/market-dashboard/src/app/page.tsx",
+        "projects/market-dashboard/src/app/stock/[symbol]/page.tsx",
+        "projects/market-dashboard/src/components/dashboard/Dashboard.tsx",
+        "projects/market-dashboard/src/components/stock/StockDetailView.tsx"
+      ]
+    },
+    {
+      "id": "dashboard-api",
+      "name": "行情搜尋、財務、同業與新聞 API",
+      "project": "market-dashboard",
+      "status": "preserved",
+      "evidence": [
+        "projects/market-dashboard/src/lib/api/finnhub.ts",
+        "projects/market-dashboard/src/app/api/stocks/route.ts",
+        "projects/market-dashboard/src/app/api/stocks/search/route.ts",
+        "projects/market-dashboard/src/app/api/financials/[symbol]/route.ts",
+        "projects/market-dashboard/src/app/api/peers/[symbol]/route.ts",
+        "projects/market-dashboard/src/app/api/news/[symbol]/route.ts"
+      ]
+    },
+    {
+      "id": "dashboard-briefing",
+      "name": "每日簡報、異動榜與圖表",
+      "project": "market-dashboard",
+      "status": "preserved",
+      "evidence": [
+        "projects/market-dashboard/src/components/briefing/BriefingView.tsx",
+        "projects/market-dashboard/src/components/movers/MoversView.tsx",
+        "projects/market-dashboard/src/components/charts/TradingViewWidget.tsx"
+      ]
+    },
+    {
+      "id": "dashboard-storage",
+      "name": "瀏覽器自選股、分析紀錄及備份匯入／匯出",
+      "project": "market-dashboard",
+      "status": "preserved",
+      "evidence": [
+        "projects/market-dashboard/src/lib/watchlist.ts",
+        "projects/market-dashboard/src/lib/analysisHistory.ts",
+        "projects/market-dashboard/src/components/settings/SettingsView.tsx"
+      ]
+    },
+    {
+      "id": "dashboard-ai",
+      "name": "個股 AI 分析及串流",
+      "project": "market-dashboard",
+      "status": "deferred",
+      "evidence": [
+        "projects/market-dashboard/src/lib/analysis.ts",
+        "projects/market-dashboard/src/app/api/analysis/[symbol]/route.ts"
+      ]
+    },
+    {
+      "id": "notifications",
+      "name": "既有 Slack／Telegram 通知程式",
+      "project": "multiple",
+      "status": "deferred",
+      "evidence": [
+        "projects/market-report/index.js",
+        "projects/stock-research/bot/slack_bot.py",
+        "projects/trading-platform/apps/api/src/lib/telegram.ts"
+      ]
+    },
+    {
+      "id": "legacy-ui",
+      "name": "舊版多觀點分析、資料庫及頁面存檔",
+      "project": "market-dashboard",
+      "status": "historical",
+      "evidence": [
+        "projects/market-dashboard/docs/REMOVED_FEATURES.md",
+        "projects/market-dashboard/docs/removed/src/lib/agents/orchestrator.ts"
+      ]
+    },
+    {
+      "id": "trading-signals",
+      "name": "Pine Script 訊號與交易資料結構",
+      "project": "trading-platform",
+      "status": "preserved",
+      "evidence": [
+        "projects/trading-platform/packages/shared/pinescript/smc_signal.pine",
+        "projects/trading-platform/packages/shared/src/types.ts",
+        "projects/trading-platform/apps/api/prisma/schema.prisma"
+      ]
+    },
+    {
+      "id": "trading-runtime",
+      "name": "策略合流、風控、下單、Python 引擎與回測 API",
+      "project": "trading-platform",
+      "status": "placeholder",
+      "evidence": [
+        "projects/trading-platform/apps/api/src/services/signalMerger.ts",
+        "projects/trading-platform/apps/api/src/services/riskEngine.ts",
+        "projects/trading-platform/apps/api/src/services/orderDispatcher.ts",
+        "projects/trading-platform/apps/engine/src/scheduler.py",
+        "projects/trading-platform/apps/api/src/routes/api.ts"
+      ]
+    }
+  ]
+}

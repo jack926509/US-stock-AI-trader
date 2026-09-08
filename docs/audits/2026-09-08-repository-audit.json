@@ -1,0 +1,197 @@
+{
+  "auditedAt": "2026-09-08",
+  "mainCommit": "a51f11786c80d9725953e19289ac47c03194dec7",
+  "sources": [
+    {
+      "repository": "jack926509/stock-report-bot",
+      "main": "25bdfc86ae40b5251c6674877a762cb6b572d9c9",
+      "branches": [
+        {
+          "name": "claude/analyze-ai-hedge-fund-integration-qrX3Y",
+          "sha": "0d33e5bf68f32cb313ca852d1ac1a4023224d8d0"
+        },
+        {
+          "name": "claude/discord-bot-setup-DvSHv",
+          "sha": "c59d2c3ee528ba60d5bcd152c279d1bf14d360ef"
+        },
+        {
+          "name": "claude/optimize-report-system-61C0H",
+          "sha": "edcfc5fd8d59c02c4ba9800f7fa9ec295d021065"
+        },
+        {
+          "name": "claude/optimize-slack-notifications-v61",
+          "sha": "ecfddaab23e2d5944a44906be3424c48f20763f6"
+        },
+        {
+          "name": "claude/port-slack-notifications-3A1iK",
+          "sha": "1710e3749552717ec3396b9fb70b6181846f6815"
+        },
+        {
+          "name": "claude/review-stock-bot-features-lCptf",
+          "sha": "c0876ce810feb37ec836fcfd51659de5dae9aad2"
+        },
+        {
+          "name": "feat/v5-ai-news-integration",
+          "sha": "3d0ce11683b709dd821b27225d618a4098c790c1"
+        },
+        {
+          "name": "main",
+          "sha": "25bdfc86ae40b5251c6674877a762cb6b572d9c9"
+        }
+      ],
+      "openIssuesAndPRs": 0,
+      "releases": 0
+    },
+    {
+      "repository": "jack926509/stock-analysis-telegram-bot",
+      "main": "33b737d9bc1ba6270b07bf74264a3f028e745894",
+      "branches": [
+        {
+          "name": "claude/fix-candlestick-chart-OYzEm",
+          "sha": "0c3b8f971ab60b73f16fd55f4d9bd7af39d28450"
+        },
+        {
+          "name": "claude/optimize-zeabur-slack-y52in",
+          "sha": "e05e2374dd7529ad3598a4c6d10945a447e08d7e"
+        },
+        {
+          "name": "claude/review-architecture-stability-QscHb",
+          "sha": "301006a4ef3e3e316793b4a15f57a5c6e65199a9"
+        },
+        {
+          "name": "claude/sqlite-to-postgres-migration",
+          "sha": "379cb5b08c571972b28dfa4787e7915a9bcb663f"
+        },
+        {
+          "name": "claude/telegram-to-slack-migration-Mkf3e",
+          "sha": "e3accd0465cba227a842b0934c1b5eb396160938"
+        },
+        {
+          "name": "main",
+          "sha": "33b737d9bc1ba6270b07bf74264a3f028e745894"
+        }
+      ],
+      "openIssuesAndPRs": 0,
+      "releases": 0
+    },
+    {
+      "repository": "jack926509/us-stock-analyzer",
+      "main": "81c8190b33aae498e1c5b83451eccdf30008f56d",
+      "branches": [
+        {
+          "name": "main",
+          "sha": "81c8190b33aae498e1c5b83451eccdf30008f56d"
+        }
+      ],
+      "openIssuesAndPRs": 0,
+      "releases": 0
+    }
+  ],
+  "comparisons": [
+    {
+      "ahead": 0,
+      "behind": 19,
+      "branch": "claude/analyze-ai-hedge-fund-integration-qrX3Y",
+      "head": "0d33e5bf68f32cb313ca852d1ac1a4023224d8d0",
+      "repo": "stock-report-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 8,
+      "branch": "claude/discord-bot-setup-DvSHv",
+      "head": "c59d2c3ee528ba60d5bcd152c279d1bf14d360ef",
+      "repo": "stock-report-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 14,
+      "branch": "claude/optimize-report-system-61C0H",
+      "head": "edcfc5fd8d59c02c4ba9800f7fa9ec295d021065",
+      "repo": "stock-report-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 1,
+      "branch": "claude/optimize-slack-notifications-v61",
+      "head": "ecfddaab23e2d5944a44906be3424c48f20763f6",
+      "repo": "stock-report-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 3,
+      "branch": "claude/port-slack-notifications-3A1iK",
+      "head": "1710e3749552717ec3396b9fb70b6181846f6815",
+      "repo": "stock-report-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 32,
+      "branch": "claude/review-stock-bot-features-lCptf",
+      "head": "c0876ce810feb37ec836fcfd51659de5dae9aad2",
+      "repo": "stock-report-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 28,
+      "branch": "feat/v5-ai-news-integration",
+      "head": "3d0ce11683b709dd821b27225d618a4098c790c1",
+      "repo": "stock-report-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 13,
+      "branch": "claude/fix-candlestick-chart-OYzEm",
+      "head": "0c3b8f971ab60b73f16fd55f4d9bd7af39d28450",
+      "repo": "stock-analysis-telegram-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 3,
+      "branch": "claude/optimize-zeabur-slack-y52in",
+      "head": "e05e2374dd7529ad3598a4c6d10945a447e08d7e",
+      "repo": "stock-analysis-telegram-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 14,
+      "branch": "claude/review-architecture-stability-QscHb",
+      "head": "301006a4ef3e3e316793b4a15f57a5c6e65199a9",
+      "repo": "stock-analysis-telegram-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 7,
+      "branch": "claude/sqlite-to-postgres-migration",
+      "head": "379cb5b08c571972b28dfa4787e7915a9bcb663f",
+      "repo": "stock-analysis-telegram-bot",
+      "status": "behind"
+    },
+    {
+      "ahead": 0,
+      "behind": 9,
+      "branch": "claude/telegram-to-slack-migration-Mkf3e",
+      "head": "e3accd0465cba227a842b0934c1b5eb396160938",
+      "repo": "stock-analysis-telegram-bot",
+      "status": "behind"
+    }
+  ],
+  "notVerified": [
+    "tags (connector endpoint unavailable)",
+    "external deployments and webhooks",
+    "secrets and environment variables",
+    "database, localStorage and runtime files",
+    "full Git history backup",
+    "historical issue and PR export"
+  ],
+  "deletionPerformed": false
+}
