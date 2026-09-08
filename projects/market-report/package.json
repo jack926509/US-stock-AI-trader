@@ -1,0 +1,19 @@
+{
+  "name": "stock-report-bot",
+  "version": "6.1.0",
+  "description": "美股日報 + 新聞快訊機器人 — Yahoo Finance / Finnhub / GPT-4o / Slack",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@slack/socket-mode": "^2.0.2",
+    "@slack/web-api": "^7.8.0",
+    "node-cron": "^3.0.3",
+    "openai": "^4.77.0",
+    "yahoo-finance2": "^3.3.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,36 @@
+# Virtual Environment
+venv/
+.venv/
+
+# Environment Variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database
+bot_data.db
+*.db
+
+# tenk runtime artifacts
+data/tenk_cache/
+data/tenk_output/
+tenk/_unused/
+tenk/.git_upstream_backup/
+tenk/.gitignore

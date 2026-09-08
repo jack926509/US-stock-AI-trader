@@ -1,0 +1,1757 @@
+{
+  "version": 1,
+  "phase": "source-consolidation",
+  "runtimeEnabled": false,
+  "aiEnabled": false,
+  "notificationsEnabled": false,
+  "projects": [
+    {
+      "repository": "jack926509/US-stock-AI-trader",
+      "commit": "b9a614ced944732626667530da0cb1aff8819f0e",
+      "directory": "projects/trading-platform",
+      "files": [
+        {
+          "path": ".env.example",
+          "sha": "6b7d9a5d8c76ff7f0278dabeaac720f31cdacf2e",
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "96c299a0329cc92140d8448f3101a6a32c041faa",
+          "mode": "100644"
+        },
+        {
+          "path": ".nvmrc",
+          "sha": "209e3ef4b6247ce746048d5711befda46206d235",
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "74be027ee71b7d68321cfb72f96c56d394710ba0",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/package.json",
+          "sha": "5e15a654de07206f86263086cc24f78394f65c60",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/prisma/migrations/20260426134140_init/migration.sql",
+          "sha": "6e4536cf47788fcab47c55b8141f91539aa29e90",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/prisma/migrations/migration_lock.toml",
+          "sha": "fbffa92c2bb7c748d6fc78f9f9dcac604dabb87d",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/prisma/schema.prisma",
+          "sha": "6c17af0a63d62de8e3e91e6ae1433245c51feedd",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/db/client.ts",
+          "sha": "582e7dc49891e37e82bb1c517b20a9f7b7940db1",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/index.ts",
+          "sha": "0d9a2cba0d7850e5ce17aed65c554e8f1e0c436e",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/lib/logger.ts",
+          "sha": "10753d6d9770c0d3510cd2573096f97aa25cca54",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/lib/telegram.ts",
+          "sha": "4cce16d684c538c617892106044ccdab19266fe7",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/routes/api.ts",
+          "sha": "7c5b7b04564e38f6aba2a0db7e0f60a5b7d8c66b",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/routes/internal.ts",
+          "sha": "cf29a388e44f33293fa0b0841b73c9ec6b1a4d08",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/routes/webhook.ts",
+          "sha": "d7065302ed899bd46fa5b6718d701ecbc34f070f",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/scripts/test-telegram.ts",
+          "sha": "eb09a196fc6abca863289398f4d989014df1be70",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/services/claudeAnalyzer.ts",
+          "sha": "e2832e68eb10f2d2f9da4b5cd82678bb5d9ad27f",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/services/orderDispatcher.ts",
+          "sha": "29c42992ede96b8a7a6213d5e71371d415a8fc89",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/services/positionSizer.ts",
+          "sha": "4979a83f7f253f6c366947e23c72ba51698d56c5",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/services/riskEngine.ts",
+          "sha": "fe808d33ff3e5569db91f3c69ee6a0c208fa26f6",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/services/signalMerger.ts",
+          "sha": "29e62fab6182190a2a414d4c258e7f1d62a151b7",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/src/services/telegramNotifier.ts",
+          "sha": "cc71afb4eb22afb8c36c73a51258b713901d7cec",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/api/tsconfig.json",
+          "sha": "97c954bf423352856192213fb7b9699aba584dce",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/app/backtest/page.tsx",
+          "sha": "58e5489553bac607d265629c3c5a542dd0f9a8d0",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/app/globals.css",
+          "sha": "de74979385afa9728ce270fe09d02f1fcf8f9164",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/app/layout.tsx",
+          "sha": "ed2f5ba87815603571a6225a2cba76a016b1e100",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/app/page.tsx",
+          "sha": "1dbc78abe589d341bbc23a66537d0efd1c22ec9f",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/app/pnl/page.tsx",
+          "sha": "bafe0198aa0eff3084e27d2b5b32997abf168e73",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/app/positions/page.tsx",
+          "sha": "0da4d68754e2dd4f470f49eab4abfcfb720a6f9d",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/app/signals/page.tsx",
+          "sha": "5e95bc44632299177cf56e74995db50448777d38",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/components/layout/Navbar.tsx",
+          "sha": "d0d6f9fd485373011b07fcba76120d110608d14c",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/components/layout/TabNav.tsx",
+          "sha": "cc40bf73d6a4bc79cae01a9292187527c3826766",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/components/pnl/PnLChart.tsx",
+          "sha": "df36f92c470c8a794b0e8252c6c2cea3d875dc8d",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/components/positions/PositionTable.tsx",
+          "sha": "99980ae93901f7026092c29c814bc719b4328656",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/components/signals/SignalBadge.tsx",
+          "sha": "70411c489f4c51d414661a8957429419af7cc355",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/hooks/usePolling.ts",
+          "sha": "d5df641552c7ba36bdfa8148544a2585291ce65f",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/lib/apiClient.ts",
+          "sha": "7d258175adbb3ce5d30192b3219a943f993e9a87",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/next.config.ts",
+          "sha": "c0c7401ad721f25d14443ef2cf2b50c8c166a5c1",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/package.json",
+          "sha": "cc7df86c7cdde185f3bf38839dbf77751feefe91",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/postcss.config.mjs",
+          "sha": "e008c9ceed56b640ec0a8145fc16247393f999e5",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/tailwind.config.ts",
+          "sha": "2c527d0a4b500103ec30b00972c1115cb839612b",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/tsconfig.json",
+          "sha": "4f441fe1215022d8d4eb1f78fa2a86eb76cdc7f4",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/dashboard/types/index.ts",
+          "sha": "db4cd0f9eb3b9a9ff7bb068e620e6e84071f88da",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/.python-version",
+          "sha": "2c0733315e415bfb5e5b353f9996ecd964d395b2",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/Dockerfile",
+          "sha": "31d02e4f5110d51a8bb0a6c14a946b680fac23ba",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/package.json",
+          "sha": "32062a239a20110100cb825e5682fc57db46f405",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/pyproject.toml",
+          "sha": "f1a4ffef1352ba5a75cc066771e5a5914bca4d18",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/src/__init__.py",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/src/alpaca_client.py",
+          "sha": "25f34157d7c2851afc3b45f9862a6a0e1d3d2225",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/src/api_client.py",
+          "sha": "907889db2e19972a3a9387c6dc694eca99359583",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/src/indicators.py",
+          "sha": "9e26a6771791fb18a3b0b49026836139d37b486b",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/src/scheduler.py",
+          "sha": "00f6e240999823671189dd4977bf0193a3a66f7f",
+          "mode": "100644"
+        },
+        {
+          "path": "apps/engine/src/signal_builder.py",
+          "sha": "f1760888f491b3051b7e0d0029f249532d3b07fd",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/DEVELOPMENT.md",
+          "sha": "8b26e36291c8dbbb5a17df8649504b1b8d5b7622",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/PLAN.md",
+          "sha": "ec822cf9c70d8cb55a30d94afef25177e52f7a08",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/RUNBOOK.md",
+          "sha": "1c8afdcae3519c721c9373d0f6d4ae08276bb043",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/alpaca-trader.js",
+          "sha": "cd29bcb248123fdde153fced0f9d4f94e5c8c2b2",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/README.md",
+          "sha": "7272454faf8cf6490ceaef3fca5e2b8e3916e0e8",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/app/backtest/page.tsx",
+          "sha": "39feb8e991a8579a277765b7b5bf83a3b5d4c410",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/app/layout.tsx",
+          "sha": "1d613f319929bd58f32e3cabfbb504ed449ce214",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/app/page.tsx",
+          "sha": "02a383515037b616bcd350c2bea59556815433c3",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/app/pnl/page.tsx",
+          "sha": "328f6ec7df6b0e1fffa4614a1fb31de696c663b2",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/app/positions/page.tsx",
+          "sha": "117dbbda6062e2bb9d3086e6d540492865b792a2",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/app/signals/page.tsx",
+          "sha": "d6880169de962b8a940814b953c44248c87fec5f",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/components/layout/Navbar.tsx",
+          "sha": "ecaea10248cfab1f383c159090e05000c846eefa",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/components/layout/TabNav.tsx",
+          "sha": "77d2de44335eb25e5f97a9ab83398984042d97d2",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/components/pnl/PnLChart.tsx",
+          "sha": "f071385f52449ab39f9ac51cab13243b8a31b757",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/components/positions/PositionTable.tsx",
+          "sha": "a0a3bbb611fde5781bd4d5594c5bf449a1403f4a",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/components/signals/SignalBadge.tsx",
+          "sha": "6a3e0ea2a0f18c88a610317577a16de43bf4f941",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/hooks/usePolling.ts",
+          "sha": "8796a50fa5e86ba99c1ec7465ef735f9e192202e",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/lib/apiClient.ts",
+          "sha": "20c1a737ab922403e4ad2f6b1031dc028f94150c",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/package.json",
+          "sha": "b462c99ce9fb2a08e25e5278dba744d591f9a628",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/frontend-from-github/types/index.ts",
+          "sha": "0c84f8d8eb3514dab2ca5c42a3fd24f58f966733",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/legacy-reference/webhook-server.js",
+          "sha": "a933e8effca606bd0001d6d27928cb28a617544e",
+          "mode": "100644"
+        },
+        {
+          "path": "package.json",
+          "sha": "70c20b5dbc709bccced803590dc3e897fe0f0910",
+          "mode": "100644"
+        },
+        {
+          "path": "packages/shared/package.json",
+          "sha": "6f875785f92dc6afe4ad92fbe7d7c827d96cea50",
+          "mode": "100644"
+        },
+        {
+          "path": "packages/shared/pinescript/smc_signal.pine",
+          "sha": "e64ab329798c907670e901b6b9d5e230e7077db8",
+          "mode": "100644"
+        },
+        {
+          "path": "packages/shared/src/index.ts",
+          "sha": "a0c4ebf250f55544fed839076f8f6c7efc546a01",
+          "mode": "100644"
+        },
+        {
+          "path": "packages/shared/src/types.ts",
+          "sha": "30656e7fc8d109a369531ae54277b766f8be09e9",
+          "mode": "100644"
+        },
+        {
+          "path": "pnpm-lock.yaml",
+          "sha": "25beae7177ca298da2c75a6e0f1536b814afa229",
+          "mode": "100644"
+        },
+        {
+          "path": "pnpm-workspace.yaml",
+          "sha": "3ff5faaaf5f139c707e338e7e89e51606e9e0ace",
+          "mode": "100644"
+        },
+        {
+          "path": "tsconfig.base.json",
+          "sha": "97dddcf0ec72072584b7c4c80a721444161bc9a1",
+          "mode": "100644"
+        },
+        {
+          "path": "zeabur.json",
+          "sha": "8feee4ec1fd1cac89ddf96da6fad301d27161d8d",
+          "mode": "100644"
+        }
+      ]
+    },
+    {
+      "repository": "jack926509/stock-report-bot",
+      "commit": "25bdfc86ae40b5251c6674877a762cb6b572d9c9",
+      "directory": "projects/market-report",
+      "files": [
+        {
+          "path": ".env.example",
+          "sha": "96b8bc124651c0e4a11a89bf391f751ef824cbcd",
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "523596286b22de7777f656deff807b6d91cbb280",
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "9452723a1defa1db1b4b0a6c63e3074cca6c87bf",
+          "mode": "100644"
+        },
+        {
+          "path": "agents/buffett.js",
+          "sha": "47f945ff34c6e75591ed8523e83db7fdec1032b8",
+          "mode": "100644"
+        },
+        {
+          "path": "agents/fmp.js",
+          "sha": "0af8e38dccfed625b9e67462abe705bc1cae0b23",
+          "mode": "100644"
+        },
+        {
+          "path": "agents/fundamentals.js",
+          "sha": "82e21d08d5cbf8611e621d23337de6f8b8f96064",
+          "mode": "100644"
+        },
+        {
+          "path": "agents/graham.js",
+          "sha": "9a756254b98763ea75ffcc837a49e6547269ed71",
+          "mode": "100644"
+        },
+        {
+          "path": "agents/index.js",
+          "sha": "7c4625e3e2e278c6e032ef880a030fc9cc90f73d",
+          "mode": "100644"
+        },
+        {
+          "path": "agents/perplexity.js",
+          "sha": "9a304def05c7ca36313cac93d48e1e99a6e5eaf2",
+          "mode": "100644"
+        },
+        {
+          "path": "index.js",
+          "sha": "7f43fc95c526cea9af3013c779dbc7ad211a84d8",
+          "mode": "100644"
+        },
+        {
+          "path": "package-lock.json",
+          "sha": "818094687a0bc960e93d074a7ec8758d8d6574dc",
+          "mode": "100644"
+        },
+        {
+          "path": "package.json",
+          "sha": "c86a535b5fc4f6c631ea8cfc6f75d9aafa4a8c91",
+          "mode": "100644"
+        }
+      ]
+    },
+    {
+      "repository": "jack926509/stock-analysis-telegram-bot",
+      "commit": "33b737d9bc1ba6270b07bf74264a3f028e745894",
+      "directory": "projects/stock-research",
+      "files": [
+        {
+          "path": ".env.example",
+          "sha": "3df09e6cc3bc2e99e43e2abf96c6efaf811f7e5e",
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/deploy.yml",
+          "sha": "b4393b69cbfd2d707c4a45ace718a11f4ed30cd8",
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "05a498d4732ff34c2425741ca0eb86f03f5b5ba4",
+          "mode": "100644"
+        },
+        {
+          "path": ".nojekyll",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "Procfile",
+          "sha": "629b83adb43e6a580ca51e8a77c9c6131b4a0b7c",
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "922817f0334daab8ca8749cec173885366c24dd6",
+          "mode": "100644"
+        },
+        {
+          "path": "analyzer/__init__.py",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "analyzer/llm_analyzer.py",
+          "sha": "85c7998a76d3f2da67bdc2b1bae1d45c262b5a9f",
+          "mode": "100644"
+        },
+        {
+          "path": "app/__init__.py",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "app/ai/__init__.py",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "app/ai/exceptions.py",
+          "sha": "bae2bf12b4ba9c3d20cd1ee1cdd5c021f5000080",
+          "mode": "100644"
+        },
+        {
+          "path": "app/ai/planner.py",
+          "sha": "0f19e851fce934a98c70ef5fea20ace2fc760ec2",
+          "mode": "100644"
+        },
+        {
+          "path": "app/ai/writer.py",
+          "sha": "1456796eef77c1ec80ac08d33c5ccc0b5dfef94e",
+          "mode": "100644"
+        },
+        {
+          "path": "app/pipeline.py",
+          "sha": "742eb6e45f9cbebd027bf4890e393e00f6bc81e6",
+          "mode": "100644"
+        },
+        {
+          "path": "bot/__init__.py",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "bot/slack_bot.py",
+          "sha": "99f2e387e7491204deee6973150b537ff68a4599",
+          "mode": "100644"
+        },
+        {
+          "path": "bot/tenk_handler.py",
+          "sha": "96a3f4267d3a35b6fd85bdeb1be9538dcbfa6f1f",
+          "mode": "100644"
+        },
+        {
+          "path": "config.py",
+          "sha": "6f45ed8ab3446b33fc4d256642318dc6c5f4ede2",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/__init__.py",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/analyst_fetcher.py",
+          "sha": "4717697fc5659fc42f940dc142d1d3f135c98154",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/earnings_surprise_fetcher.py",
+          "sha": "9e20c83964ae0d3c7635004f1dfaa00009433d9f",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/finnhub_fetcher.py",
+          "sha": "7fc8f1434e1d909f36b97d7d225855b99f168929",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/fmp_fetcher.py",
+          "sha": "38a75c2d5a7a1be650913ebb5c11ff7fc2ce7eea",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/history_fetcher.py",
+          "sha": "73bd4078ebd66aa86eda0a7a88a2634cc82e5f38",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/insider_fetcher.py",
+          "sha": "dbb21da401a900052f33f170e605f60bec5cb415",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/macro_fetcher.py",
+          "sha": "75d885f7ccd872b9b4d4084d42c7388bfb2b6015",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/peer_fetcher.py",
+          "sha": "2883ad5ad36d3472f9a5ddfe5d64333b6b7da8a4",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/stooq_fetcher.py",
+          "sha": "f2ed931c9383eefa0d4c6ce031278eda1e706ac2",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/tavily_fetcher.py",
+          "sha": "655109ec036454abad0b7ddb0df9d71521d4b0f4",
+          "mode": "100644"
+        },
+        {
+          "path": "fetchers/tradingview_fetcher.py",
+          "sha": "6158e91d19c67a093235774fd0116f159af7d2a9",
+          "mode": "100644"
+        },
+        {
+          "path": "main.py",
+          "sha": "b70538c256cac3fbcded7cd526ea763eba9467e3",
+          "mode": "100644"
+        },
+        {
+          "path": "requirements.txt",
+          "sha": "62ba9278e927fd177cf7126957a6e0803aad8237",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/LICENSE",
+          "sha": "ab48065f119a909342f8f19c0c13b82d9a846e2f",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/README.md",
+          "sha": "3a63e9744d24a5f87a0a6d9f52ea4dbfbf883994",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/__init__.py",
+          "sha": "57318be86b23223f8533a3c12229731659fd559a",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/agent_runner.py",
+          "sha": "456937e4434b2deea9529a91bbd537f7e7dc0ee1",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/agents/analyst_agent.md",
+          "sha": "d21c66a0e5ab3034d4aee494faad10457ef2e805",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/data_fetcher.py",
+          "sha": "46a05abfc8dac9015fcc2c62f33cd671ff1ce3a6",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/doc_converter.py",
+          "sha": "f651bae69d3c50b0919b013c7051c3b5a11b7f8c",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/eval_runner.py",
+          "sha": "8f61b29be2004b528fc7f3ed501d5f95718d4fa5",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/mock_outputs.json",
+          "sha": "eaf765140be8e7a8ba9ef847ce462951922eb656",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/orchestrator.py",
+          "sha": "bdcbd8c8bcf14e07cd19715b6bad728e93464263",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/pipeline.py",
+          "sha": "92adf4bca633d6ae70d4907bf4d3d12f0c4b87b2",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/pipeline_state.py",
+          "sha": "7946492783b7eb8ac85b2959563abb317694c2b6",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/report_writer.py",
+          "sha": "dd33ea290f6884643c0b52047cf39faed979b607",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/section_splitter.py",
+          "sha": "3fe766745822856aa10f64b4f77c7b5ba0b0998a",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/business_analysis.md",
+          "sha": "ca4e39de1252461d675b3ded5c80a2de4fff34f3",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/competitor_mapping.md",
+          "sha": "ff8e6d26a256cf2483b83d76652c1fb626dd2f82",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/completeness_check.md",
+          "sha": "079a4063b32b8bebe1bb8540dbd8e5394b186777",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/cross_year_compare.md",
+          "sha": "2c35cf259a955934b8ae1d9e12344977358a5ed2",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/eval_analysis.md",
+          "sha": "16e8e4ec57437a66d75e3c54b7df8d85d9b523da",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/financial_analysis.md",
+          "sha": "866becea5e6cc69ba5a437e6585710563ba916d4",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_assets.md",
+          "sha": "19d82b02d3e5aa8888bc82b968b7e0225b7e84ab",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_combined.md",
+          "sha": "3f8eab018ff9984da065e68a6af20db936388098",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_compensation.md",
+          "sha": "00079a3b0f6a7b7f07ca3d4012725be31288ca81",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_pension.md",
+          "sha": "af4cd078aa679a909198dd55947c2b2eff6c93b6",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_receivables.md",
+          "sha": "5e8c50a04cb560e8d1a62e6a6abae48eca24a297",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_revenue.md",
+          "sha": "b6c8eef4b9813d8d0a3b3b83f9ea1814b70b7295",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_risk.md",
+          "sha": "f2e5b4f5abdcc06592dcfe9b4185f8ac2a745c2a",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_segment.md",
+          "sha": "be959eb90980223534a06a537e9a401790411361",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/footnotes_tax.md",
+          "sha": "b680133b7b936b5950d20844bba3c6b85fc0624e",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/governance_analysis.md",
+          "sha": "5b9317519d9f1de6d24613d884da1b5f9a218bae",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/insight_synthesis.md",
+          "sha": "3e98179e53430938f2abdf6fca95878e4f7b0191",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/mdna_analysis.md",
+          "sha": "e4b0ec17e8589f9ce21a2a1c9b91af11d394abf7",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/rerate_narrative.md",
+          "sha": "576f1261e4b85d99705685499b87eaa4979c8e4f",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/rerate_quality.md",
+          "sha": "de1eee56839c61d3402f0a6949ba4676e25684e1",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/rerate_structure.md",
+          "sha": "d2e12d5ae6ec8e37bce27059dbbbc6a9e13e851b",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/risk_analysis.md",
+          "sha": "6f54cb611bc402b8e73db4ce966fd1c7056ba81a",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/section_splitter.md",
+          "sha": "29938739a319ff2b1915844b58f7d878ac371933",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/segment_trend.md",
+          "sha": "2bfb9f1577999789eec38cbc56a5c6d909e9d864",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/supply_chain_analysis.md",
+          "sha": "90c786d492b376dbcb0018a6322e98a06e672baa",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/terms_glossary.md",
+          "sha": "bf20781e84d9ebf2cba9fbda3ea0cb52588d9d57",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/three_statement_cross.md",
+          "sha": "4fe0d082fc3443c7b1a870a25cc1b6105dbb8c18",
+          "mode": "100644"
+        },
+        {
+          "path": "tenk/skills/unusual_operations.md",
+          "sha": "d0245759516a5b546d05da61e3955d9228810690",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/__init__.py",
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/ai_client.py",
+          "sha": "14893de387cb1167248f4266f76d0a553648e132",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/cache.py",
+          "sha": "514e40df1bf41f48f057d0d04a37ce88bfe3f730",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/chart.py",
+          "sha": "e3c80443dbbd7855b2eb376f35eadb5e9c576d1d",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/cleanup.py",
+          "sha": "6444c19a0fb685c80cdf780cbaf380f5a3e14fe4",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/database.py",
+          "sha": "ba35dc1d5b37fe63820d9b50df8d5b39ac860043",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/formatter.py",
+          "sha": "8e0f9ceab66954a841b2b2026c86725540363fea",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/health.py",
+          "sha": "9db85641a0c0e93ada08637fb6f8ac1e95a65481",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/rate_limiter.py",
+          "sha": "aa67aa29459a7d55c53f980d38ec85616fcca15e",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/retry.py",
+          "sha": "f1626a3f2a0d300b33423a40806016d983ee34d3",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/signals.py",
+          "sha": "81cd8872c9fdd8fdf9bbcb47bb9f3f2538b190bc",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/slack_api.py",
+          "sha": "ec78159a6902c3c0ee7d1a937d8ee0f7d62f1a95",
+          "mode": "100644"
+        },
+        {
+          "path": "utils/slack_formatter.py",
+          "sha": "24014745335c598ed2023acec47baf98eafe074d",
+          "mode": "100644"
+        },
+        {
+          "path": "zbpack.json",
+          "sha": "a880108aacd14662c98714d13cc25728cbfd9990",
+          "mode": "100644"
+        }
+      ]
+    },
+    {
+      "repository": "jack926509/us-stock-analyzer",
+      "commit": "81c8190b33aae498e1c5b83451eccdf30008f56d",
+      "directory": "projects/market-dashboard",
+      "files": [
+        {
+          "path": ".env.example",
+          "sha": "0056c7d36bab192c73dc6045a3034cfe2a34f3d5",
+          "mode": "100644"
+        },
+        {
+          "path": ".env.local.example",
+          "sha": "acd220a56bfffe34b9a76b1ec7b70fa8191ea40a",
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "sha": "4edea9d4d2cf388b05169587e3befb7bc88821f0",
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "4ba7c6a78f464ccc841c979f3fa8e794c56642ef",
+          "mode": "100644"
+        },
+        {
+          "path": ".prettierrc",
+          "sha": "e0b900fd9772f150e2b36114dd76729e1a0a64b8",
+          "mode": "100644"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha": "8bd0e39085d5260e7f8faffcad2fdc45e10aef33",
+          "mode": "100644"
+        },
+        {
+          "path": "CLAUDE.md",
+          "sha": "43c994c2d3617f947bcb5adf1933e21dabe46bb5",
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d45056c888388ebcfa751bfcfc214e2010d133a6",
+          "mode": "100644"
+        },
+        {
+          "path": "components.json",
+          "sha": "8d886db5756307e013bc8ae97c05220fb7b6ab7a",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/REMOVED_FEATURES.md",
+          "sha": "8abebd968217a86f53b25a1998cacd2db164bded",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/data.jsx",
+          "sha": "625f2d9059df9f18518571be50e18bd7554a86e6",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/design-canvas.jsx",
+          "sha": "9f3fc6111e185cdab61e806a7849a141a611a528",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/index.html",
+          "sha": "6d5fa09a64e70482682d89809b6239cff821ea81",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/ios-frame.jsx",
+          "sha": "1a15e2712c0ec45bd632127ee9ad483eb060d1ea",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/mobile-screens.jsx",
+          "sha": "ad8e5e46347173c336390849981f1d20d723bf7d",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/primitives.jsx",
+          "sha": "8648bf9d570ea9f58b1ac3df2bf1e937ffa79a94",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/scraps/sketch-2026-04-26T06-13-58-l8ksvf.napkin",
+          "sha": "5c532b255848428c6593777143f496f333c6ce57",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/tweaks-panel.jsx",
+          "sha": "184b014e06e83fbe3bf188de6bf582424f7a45ee",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/web-dashboard.jsx",
+          "sha": "e6643fd432a817f59896f5dd8b7bbee804779e8b",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/mockups/web-stock-detail.jsx",
+          "sha": "4b3512260f0af4d2d6ee4af4486c6052e66099fd",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/drizzle.config.ts",
+          "sha": "4b311f190435d05f7a95a0a545c22b39d783728c",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/drizzle/0000_outstanding_puma.sql",
+          "sha": "5308664cdb4b488cd04355bb63d6e27d1939bdf6",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/drizzle/0001_abnormal_jocasta.sql",
+          "sha": "fa206a5494b81ba74f8c90f635a5dd0caa449212",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/drizzle/meta/0000_snapshot.json",
+          "sha": "c59c64200802e1133bbaffc80d2536705d3747bd",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/drizzle/meta/0001_snapshot.json",
+          "sha": "4d659a25c09e59f31d11d901e7334132d2016ac0",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/drizzle/meta/_journal.json",
+          "sha": "5b85a7fbd4db8832a891bf4ec87addb03ba7507d",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/README.md",
+          "sha": "2d52ace3dd3646156c743081913a17e4c0b3b57c",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/data.jsx",
+          "sha": "625f2d9059df9f18518571be50e18bd7554a86e6",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/design-canvas.jsx",
+          "sha": "9f3fc6111e185cdab61e806a7849a141a611a528",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/index.html",
+          "sha": "cdf53419a99bcfa1adca8d2aadbe07cd8206476d",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/ios-frame.jsx",
+          "sha": "1a15e2712c0ec45bd632127ee9ad483eb060d1ea",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/mobile-screens.jsx",
+          "sha": "b2d0ce828c0e9e136caa42a7478036714047842e",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/primitives.jsx",
+          "sha": "8648bf9d570ea9f58b1ac3df2bf1e937ffa79a94",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/scraps/sketch-2026-04-26T06-13-58-l8ksvf.napkin",
+          "sha": "5c532b255848428c6593777143f496f333c6ce57",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/tweaks-panel.jsx",
+          "sha": "184b014e06e83fbe3bf188de6bf582424f7a45ee",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/web-dashboard-v1.jsx",
+          "sha": "e6643fd432a817f59896f5dd8b7bbee804779e8b",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/web-dashboard-v2.jsx",
+          "sha": "e18dedd54bc4bf084d149b82864380d38e072cd7",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/web-dashboard.jsx",
+          "sha": "e6643fd432a817f59896f5dd8b7bbee804779e8b",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/web-stock-detail-v1.jsx",
+          "sha": "4b3512260f0af4d2d6ee4af4486c6052e66099fd",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/web-stock-detail-v2.jsx",
+          "sha": "328efecf650873aad099d640321df7f1962edcac",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/mockups/web-stock-detail.jsx",
+          "sha": "4b3512260f0af4d2d6ee4af4486c6052e66099fd",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/app/api/deep-analysis/[symbol]/route.ts",
+          "sha": "86ce188e180a2e87588b2476f3f68773bd07484c",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/app/api/financials/[symbol]/route.ts",
+          "sha": "41dcfba88dd62e04450c2729fae6d9bc36a132d5",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/app/api/news/[symbol]/route.ts",
+          "sha": "decf8fe12ae6e41a9350608a4a52822b0260bb12",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/app/api/peers/[symbol]/route.ts",
+          "sha": "48a48ab36c1419a8693ffb849d6d6e07eaa457dc",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/app/api/stocks_[symbol]/route.ts",
+          "sha": "254b0789a690a045e773f8b9b06b82c63ef5b56b",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/app/stock/[symbol]/deep-analysis/DeepAnalysisClient.tsx",
+          "sha": "5673326cb14727110cc8e65786775621c150e659",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/app/stock/[symbol]/deep-analysis/page.tsx",
+          "sha": "0b7c121c990d794cd97562863284dff6af986ec1",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/NewsRail.tsx",
+          "sha": "086da61335b21a28a9d641a3a34b0e63c3043d53",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/PeerComparison.tsx",
+          "sha": "74be53bd906b009a0e2bdbccf0708dea67e3cb0a",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/ScoreCard.tsx",
+          "sha": "5625f9fd0d63c4cc9644581d9c91b28d1d5f78f0",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/SectorBreakdown.tsx",
+          "sha": "d98a2ff96f1fcb258bc7302c9fa3941830ce837a",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/StockNewsList.tsx",
+          "sha": "034b8901e8df5138a414acc8510ac9060b0b6bba",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/analysis/NewsPanel.tsx",
+          "sha": "ccc59046c053e2d3bfbf50d9904fa20941891809",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/deep-analysis/AgentCard.tsx",
+          "sha": "caf0742eb4420b96eb5d6240a59183c1fb12a533",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/components/deep-analysis/PhaseProgress.tsx",
+          "sha": "d4ae4d498339bfd30f4bf33783e05cc16c8cae55",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/debate/bear.ts",
+          "sha": "4e23e69aa32ffc708b75831e714d9a15bc867f5b",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/debate/bull.ts",
+          "sha": "58bfe2fd2585866625bf43311029a6a13e88d872",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/debate/manager.ts",
+          "sha": "5a5dad5582e932a5402672d28021e6c002cc3fbf",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/debate/shared.ts",
+          "sha": "22cf588a4e9c8815c1feb35d9940afe08f736ca8",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/event-queue.ts",
+          "sha": "52d243d2cf1d49ec159f249a36bf63047ddbd238",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/masters/ackman.ts",
+          "sha": "2292483f401348d1ab3a983d2881cda825388430",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/masters/buffett.ts",
+          "sha": "9a29a357a99c0b4d6bf38864ca3a929d4fa6fae8",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/masters/burry.ts",
+          "sha": "f144c3d2fcd79a15ae46b8ba8f6f3bcee19de46c",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/masters/lynch.ts",
+          "sha": "37cdde6d2f9d41669dd156aae21f56cb989b12f9",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/masters/shared.ts",
+          "sha": "455e491f5a874a0cceda14595b45a0ccffb87e7b",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/masters/taleb.ts",
+          "sha": "0e045bd579ba6a68ffbe17f8b2d85d609fb210ab",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/masters/wood.ts",
+          "sha": "08f88d96941209ca885989b4df2754fdcf94c6c5",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/orchestrator.ts",
+          "sha": "fb4917fbebc4cfd2d5e4fc744a8c67e470e7eabd",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/risk/aggressive.ts",
+          "sha": "d91dfbfb7b7974de1d0b81fc0cf40ae6d2bfd346",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/risk/conservative.ts",
+          "sha": "2f20a30618d31fa3687ab53097d6b5c9cc9fd1ac",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/risk/neutral.ts",
+          "sha": "4edd421cfd6aaa83ccf4a5a57354a5d6340d280e",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/risk/portfolio.ts",
+          "sha": "d58cd5703dfbceeca63b60054e1a25b427eecbcf",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/runner.ts",
+          "sha": "7a8d03d779479e7b311c00bf0c2e435e7de5813a",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/sse-parser.ts",
+          "sha": "e040c15e6b4304a9ed8aa08010eab6f59f20538e",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/agents/types.ts",
+          "sha": "c376ff15f3b79d94a21c75c2b20dd77092dc7837",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/context-builders.ts",
+          "sha": "93bf13e83dc651981f8271367b6692b310fc140d",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/db/index.ts",
+          "sha": "36c2161b7b5763add80a59a93897f12ca6c9871e",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/db/schema.ts",
+          "sha": "e22903ec24f443e16b24e8f8060a5cb0435dcdf2",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/fmp.ts",
+          "sha": "98356ac8ba321a6e8e19ea72841f266f8df7d2f3",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/scoring.test.ts",
+          "sha": "95f5b66fa5da8bdc484fa37c3aee758c9b169069",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/lib/scoring.ts",
+          "sha": "99f1323d1b0abf0c06ad9b7122deebff393ed6fa",
+          "mode": "100644"
+        },
+        {
+          "path": "docs/removed/src/proxy.ts",
+          "sha": "2690bd734a915236c3c07d574edc25eb0d2ad2de",
+          "mode": "100644"
+        },
+        {
+          "path": "eslint.config.mjs",
+          "sha": "8f4398d2b67ea54601126a748b4db3212bb9c2dd",
+          "mode": "100644"
+        },
+        {
+          "path": "next.config.ts",
+          "sha": "6c1b87a7d698aab03d4606a3d481d2f656dafff2",
+          "mode": "100644"
+        },
+        {
+          "path": "package-lock.json",
+          "sha": "86136595452661e48a7fe0c18c822dd184c71d53",
+          "mode": "100644"
+        },
+        {
+          "path": "package.json",
+          "sha": "333d5d3eaef68e100b5ff0b117d9a5b88a24d32e",
+          "mode": "100644"
+        },
+        {
+          "path": "postcss.config.mjs",
+          "sha": "61e36849cf7cfa9f1f71b4a3964a4953e3e243d3",
+          "mode": "100644"
+        },
+        {
+          "path": "public/file.svg",
+          "sha": "004145cddf3f9db91b57b9cb596683c8eb420862",
+          "mode": "100644"
+        },
+        {
+          "path": "public/globe.svg",
+          "sha": "567f17b0d7c7fb662c16d4357dd74830caf2dccb",
+          "mode": "100644"
+        },
+        {
+          "path": "public/next.svg",
+          "sha": "5174b28c565c285e3e312ec5178be64fbeca8398",
+          "mode": "100644"
+        },
+        {
+          "path": "public/vercel.svg",
+          "sha": "77053960334e2e34dc584dea8019925c3b4ccca9",
+          "mode": "100644"
+        },
+        {
+          "path": "public/window.svg",
+          "sha": "b2b2a44f6ebc70c450043c05a002e7a93ba5d651",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/analysis/[symbol]/route.ts",
+          "sha": "b65669f00a728ba71df10e38ee744bb58f98cda4",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/financials/[symbol]/route.ts",
+          "sha": "9df8706cf96f70a0b79370c42dff23d38787a427",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/market/route.ts",
+          "sha": "84f6580946d989bad420e5f9ed74163ec707f283",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/movers/route.ts",
+          "sha": "c133237a6831f2595eab500566f20452701a825b",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/news/[symbol]/route.ts",
+          "sha": "5bf5294ebe75c82900fe494b86bde92f5d7e20b7",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/peers/[symbol]/route.ts",
+          "sha": "ae6b047c2cda8064381ce779df4ed9458be15f03",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/profile/[symbol]/route.ts",
+          "sha": "6ff8939130800a6e7fc81bdb270ffaf43cf33f44",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/stocks/route.ts",
+          "sha": "499eac4189d1e62f04a5b5d872c29ff23caf6fbf",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/api/stocks/search/route.ts",
+          "sha": "c7d91607b65ed06b43af9917d9ce6d6bb9a31773",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/briefing/page.tsx",
+          "sha": "01e2b5a424e785bea7e7795ef24b09c1ab9949ec",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/error.tsx",
+          "sha": "6eff7ae0074a019fa4370692d806ff552c5bca08",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/favicon.ico",
+          "sha": "718d6fea4835ec2d246af9800eddb7ffb276240c",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/globals.css",
+          "sha": "9d3a33976687108ca098aa4307a79e867e4eb20c",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "sha": "a3fdd79103bc0e0ccfe81afa2b6a8ecaa684a1e6",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/loading.tsx",
+          "sha": "03b72c300fce8d90880326067722d869edc7445d",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/movers/page.tsx",
+          "sha": "a47d107f73087154c251b073ee731427ec3045f4",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/not-found.tsx",
+          "sha": "10bae695284a33b80b6f29229600a6e61c1fe125",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "sha": "342f6ece8f0a71877dbb52448ccec430ec78d79c",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/settings/page.tsx",
+          "sha": "2332a183af207caeb64beedbc2d050b6cb0b4ab4",
+          "mode": "100644"
+        },
+        {
+          "path": "src/app/stock/[symbol]/page.tsx",
+          "sha": "dcda72d0ef43c2a966b341d8a7abb13749660215",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/analysis/AnalysisCard.tsx",
+          "sha": "75f4dd1ff084fd5f2f1c53ddd82d72d71ad14b6c",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/briefing/BriefingView.tsx",
+          "sha": "0786adf5481b648b1d1416fe956714b2f39db219",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/charts/TradingViewSkeleton.tsx",
+          "sha": "c5d6e181866d9f9e74920c91a463c62432408a3d",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/charts/TradingViewTechAnalysis.dynamic.tsx",
+          "sha": "095cf877b09abac631f4f4945fbd4ac9b967cd03",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/charts/TradingViewTechAnalysis.tsx",
+          "sha": "6a4170a589398ac474d14e1553b1c55b975ff57d",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/charts/TradingViewWidget.dynamic.tsx",
+          "sha": "f303c4520666d5c2d25de2b98ef20eff892db8e2",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/charts/TradingViewWidget.tsx",
+          "sha": "20e9670bdf1e7c3ef0d34bc189cc042633731636",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/dashboard/AddStockDialog.tsx",
+          "sha": "5a5680a8bf2561d978d4709e776307148d943984",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/dashboard/Dashboard.tsx",
+          "sha": "33c595fe4616c6f7f25dc83e9e22c7b75244bd30",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/dashboard/IndicesStrip.tsx",
+          "sha": "30f34ca29e167274d28734a10710051ccd79e9cf",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/dashboard/Navbar.tsx",
+          "sha": "8ebf9634686cb2c92f217ee14fe287e919b36642",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/dashboard/SidePanel.tsx",
+          "sha": "0e6708bb1a94dd5907f445a32ca76b72e16facfe",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/dashboard/WatchlistTable.tsx",
+          "sha": "de7f2cfa6edf6acd81a021de5f07716ef6e27e95",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/design/CommandLine.tsx",
+          "sha": "1c2e2902fc5d4d7022d5cb664a2ba4b4a3193aef",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/design/LogoTile.tsx",
+          "sha": "feda1763a85c7dd04b25055c9715b40752b752bd",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/design/SectionHeader.tsx",
+          "sha": "cbe8a0a2e66d1e48eaa627f9da6dc6ebb1d3d15b",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/design/Sparkline.tsx",
+          "sha": "161cc65cf681c5736c1c54a6db1e30f4af506680",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/design/TickerBar.tsx",
+          "sha": "c6c145c8c3d724b70c91bd00336c954a87b094d4",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/movers/MoversView.tsx",
+          "sha": "448aa6138731bf670a705cb0ce8e29c07aca3a10",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/providers.tsx",
+          "sha": "3612dfe86652009a9cd09bbe71bdb146a2291307",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/settings/SettingsView.tsx",
+          "sha": "7f233ebd5851e7cf6c9314aa50a99c6fe82412b7",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/stock/ChartCard.tsx",
+          "sha": "2d30444b5b0959394db60efbb9c0944fec9a43c4",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/stock/QuoteSheet.tsx",
+          "sha": "2e85b5fb8841699541a7f6ce7396b51cec54dbbc",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/stock/RightTabs.tsx",
+          "sha": "07359df2272590caf2f7c00b81bd27df4fe6661a",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/stock/StockDetailView.tsx",
+          "sha": "9416ed9fffdaad80ade07d294a169d484e9ee9df",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/stock/StockHeader.tsx",
+          "sha": "d97f81b9259eb7c59a0393952a3c10ee22163d10",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/ui/ErrorBoundary.tsx",
+          "sha": "aa76f25e5840000ec9c5bc3331ead5167abaff49",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/ui/badge.tsx",
+          "sha": "b20959dd775e40754a5f66940c62ee4f7feaef36",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "sha": "ded01b25ca4c701335a13401e561b41ca87c88b3",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "sha": "0e91f971bc933a6f62ffbf04b60548b3fa8432e4",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/ui/input.tsx",
+          "sha": "7d21babba91655ac1cd6a5ea630eb2ec18d2b52b",
+          "mode": "100644"
+        },
+        {
+          "path": "src/components/ui/sonner.tsx",
+          "sha": "994436c3c031434c2b75a32d762756f6182b5186",
+          "mode": "100644"
+        },
+        {
+          "path": "src/hooks/useSymbolSearch.ts",
+          "sha": "d84556d5a9d33b1b92f9e718855b201d2f2c95f4",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/__tests__/analysis.test.ts",
+          "sha": "797306df00044dc5162bf8d16552ad6a137e1c3e",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/__tests__/api-response.test.ts",
+          "sha": "df09d848ed82b0bb995948a5050d5020ba3c3a6c",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/__tests__/validations.test.ts",
+          "sha": "0b89cd6d57e493fea642207ff0d5821e83814f41",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/analysis.ts",
+          "sha": "a698442fa0b6250dec535f603259cf22a02966f1",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/analysisHistory.ts",
+          "sha": "e7ce1d1c31a79a9fca97a54ae61a82608acd3082",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/api/finnhub.ts",
+          "sha": "aabcfc705ec0f916a8732e9a6b05f35074cd7807",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/api/response.ts",
+          "sha": "a91cc25aa8a9ad120535a5cb9566268f80c3bcd9",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/format.ts",
+          "sha": "604059da7fda5b9dad6900cac4f46ecb01e3128a",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "sha": "bd0c391ddd1088e9067844c48835bf4abcd61783",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/validations.ts",
+          "sha": "06c3058851d2892dad2d0d99e2cabe021a40483e",
+          "mode": "100644"
+        },
+        {
+          "path": "src/lib/watchlist.ts",
+          "sha": "7f3cd5e5b7409d6e7e3e991a1ada616974e64aaa",
+          "mode": "100644"
+        },
+        {
+          "path": "src/types/index.ts",
+          "sha": "abfaeee8af3b40ddd2d5db5878c3fd8dc5e99f4c",
+          "mode": "100644"
+        },
+        {
+          "path": "tsconfig.json",
+          "sha": "294e553e82f26af40c8189ae04a550c9b87ca4ef",
+          "mode": "100644"
+        },
+        {
+          "path": "vitest.config.ts",
+          "sha": "b6499a739d91a56fd906e9a4b01370073148b3ff",
+          "mode": "100644"
+        },
+        {
+          "path": "zbpack.json",
+          "sha": "7cc3eb516cabcf7f0e1924ca8ca55c1ae3fd3a83",
+          "mode": "100644"
+        }
+      ]
+    }
+  ]
+}
