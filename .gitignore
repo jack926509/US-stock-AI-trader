@@ -1,47 +1,28 @@
-# 環境變數（絕對不能推上 GitHub）
-.env
-.env.local
-.env.*.local
-
-# Node
+# Dependencies and generated output
 node_modules/
 .pnpm-store/
+.next/
 dist/
 build/
-*.tsbuildinfo
-
-# Next.js
-.next/
 out/
+coverage/
+*.tsbuildinfo
 next-env.d.ts
-
-# Python
+# Credentials
+.env
+.env.*
+!.env.example
+!.env.local.example
+# Python and local state
 __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
 venv/
 .pytest_cache/
-.ruff_cache/
-
-# Prisma
 *.db
 *.db-journal
-
-# 系統檔
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-
-# Logs
+data/
 logs/
 *.log
-npm-debug.log*
-pnpm-debug.log*
-
-# Zeabur
-.zeabur/
+.DS_Store
