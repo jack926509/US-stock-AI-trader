@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 import type { Quote } from "@/types"
+import { MARKET_QUERY_KEYS } from "@/lib/query-keys"
 
 interface TickerItem {
   sym: string
@@ -31,7 +32,7 @@ export function TickerBar() {
   }, [])
 
   const { data } = useQuery<Quote[]>({
-    queryKey: ["market-indices"],
+    queryKey: MARKET_QUERY_KEYS.unifiedQuotes,
     queryFn: () => fetch("/api/market").then((r) => r.json()),
     staleTime: 60 * 1000,
     refetchInterval: 60 * 1000,
@@ -52,7 +53,7 @@ export function TickerBar() {
     <div className="relative flex h-8 items-center overflow-hidden border-b border-white/[0.08] bg-[#0E0E0E] whitespace-nowrap">
       <div className="relative z-[2] flex h-full shrink-0 items-center gap-1.5 bg-brand px-3 font-mono text-[10px] font-bold tracking-[0.12em] text-white">
         <span className="inline-block size-1.5 rounded-full bg-up-neon shadow-[0_0_6px] shadow-up-neon" />
-        LIVE · {time} EDT
+        EOD · {time} ET
       </div>
       <div className="relative flex h-full flex-1 items-center overflow-hidden">
         <div className="inline-flex animate-ticker-scroll pl-4">

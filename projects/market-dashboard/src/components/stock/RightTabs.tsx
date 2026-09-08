@@ -24,19 +24,10 @@ interface Props {
 }
 
 interface FinancialSnapshotDTO {
-  peTTM: number
-  peAnnual: number
-  pbAnnual: number
-  psTTM: number
-  roeTTM: number
-  roaTTM: number
-  netMarginTTM: number
-  grossMarginTTM: number
-  debtToEquity: number
-  currentRatio: number
-  revenueGrowth3Y: number
-  epsGrowth3Y: number
-  dividendYield: number
+  peTTM: number | null; peAnnual: number | null; pbAnnual: number | null; psTTM: number | null
+  roeTTM: number | null; roaTTM: number | null; netMarginTTM: number | null; grossMarginTTM: number | null
+  debtToEquity: number | null; currentRatio: number | null; revenueGrowth3Y: number | null; epsGrowth3Y: number | null; dividendYield: number | null
+  nextEarningsDate: string | null
 }
 
 interface NewsItemDTO {
@@ -104,14 +95,13 @@ function QuotePanel({ profile, quote }: { profile: Profile | null; quote: Quote 
 }
 
 function f2(v: number | null | undefined): string {
-  if (v == null || !isFinite(v) || v === 0) return "—"
+  if (v == null || !isFinite(v)) return "—"
   return v.toFixed(2)
 }
 
 function pct(v: number | null | undefined): string {
-  if (v == null || !isFinite(v) || v === 0) return "—"
-  if (Math.abs(v) >= 1) return `${v.toFixed(2)}%`
-  return `${(v * 100).toFixed(2)}%`
+  if (v == null || !isFinite(v)) return "—"
+  return `${v.toFixed(2)}%`
 }
 
 function FinancialsPanel({ symbol }: { symbol: string }) {
@@ -132,6 +122,7 @@ function FinancialsPanel({ symbol }: { symbol: string }) {
     {
       title: "估值",
       rows: [
+        ["下次財報日期", data.nextEarningsDate ?? "尚未公布"],
         ["P/E TTM", f2(data.peTTM)],
         ["P/E Annual", f2(data.peAnnual)],
         ["P/B", f2(data.pbAnnual)],

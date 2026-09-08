@@ -1,10 +1,10 @@
-import { getMarketIndices } from "@/lib/api/finnhub"
+import { getUnifiedQuotes, INDEX_UNIVERSE } from "@/lib/data-service"
 import { cacheHeaders, handleApiError, jsonError, jsonOk } from "@/lib/api/response"
 
 // GET /api/market — S&P 500 (SPY) / NASDAQ 100 (QQQ) / Dow Jones (DIA)
 export async function GET() {
   try {
-    const data = await getMarketIndices()
+    const data = await getUnifiedQuotes(INDEX_UNIVERSE.map(([symbol]) => symbol))
     if (data.length === 0) {
       return jsonError("Failed to fetch market data", "API_ERROR", 500)
     }

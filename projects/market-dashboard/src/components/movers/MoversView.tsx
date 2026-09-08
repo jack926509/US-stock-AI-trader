@@ -32,7 +32,7 @@ export function MoversView() {
         <div className="mb-4">
           <h1 className="font-serif text-2xl font-bold">今日熱度</h1>
           <p className="mt-1 text-xs text-muted-foreground">
-            從美股大型權值股 50 檔池中挑出漲幅、跌幅與活躍度前 10 名（60 秒更新一次）。
+            從美股大型權值股樣本中挑出漲幅、跌幅與相對 20 日均量前 10 名；資料為已收盤日線。
           </p>
         </div>
 
@@ -63,8 +63,8 @@ export function MoversView() {
               quotes={data.losers}
             />
             <MoverColumn
-              eyebrow="MOST ACTIVE · 活躍度"
-              title="最活躍"
+              eyebrow="VOLUME RATIO · 量能"
+              title="相對均量"
               icon={<Activity size={14} className="text-brand" />}
               quotes={data.active}
             />

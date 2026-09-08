@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "baseline": "config/source-manifest.json",
+  "generatedAt": "2026-09-08T04:31:00.132Z",
+  "files": [
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/.gitignore",
+      "baselineSha": "4ba7c6a78f464ccc841c979f3fa8e794c56642ef",
+      "currentSha": "bee0d2f79948e60ba5941489bce26d9bce6c348d"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/api/analysis/[symbol]/route.ts",
+      "baselineSha": "b65669f00a728ba71df10e38ee744bb58f98cda4",
+      "currentSha": "51d96e52caa49ccbcba6dc858a823aaefbf0add8"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/api/market/route.ts",
+      "baselineSha": "84f6580946d989bad420e5f9ed74163ec707f283",
+      "currentSha": "69cec0470ac895beae03cf13ac724062390aadae"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/api/movers/route.ts",
+      "baselineSha": "c133237a6831f2595eab500566f20452701a825b",
+      "currentSha": "f139b55bd9bc0c3d7edf0e9159ebad51b390fee9"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/app/api/overview/route.ts",
+      "baselineSha": null,
+      "currentSha": "c21c4c3afee7307e275cf27f302802cc1b4d6d87"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/api/peers/[symbol]/route.ts",
+      "baselineSha": "ae6b047c2cda8064381ce779df4ed9458be15f03",
+      "currentSha": "8a105770565e7a48e939c6aa23680ac3d2516186"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/api/stocks/route.ts",
+      "baselineSha": "499eac4189d1e62f04a5b5d872c29ff23caf6fbf",
+      "currentSha": "02b1a93bf1e88c9ec073fe095bfe747cb6cacb5f"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/api/stocks/search/route.ts",
+      "baselineSha": "c7d91607b65ed06b43af9917d9ce6d6bb9a31773",
+      "currentSha": "dd0dfaae576ce99810f676b8c1ef4786463b4332"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/app/api/strategies/route.ts",
+      "baselineSha": null,
+      "currentSha": "cdb34c38f0688ee9a520d4bc68e4443123f860b7"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/app/api/watchlist/route.ts",
+      "baselineSha": null,
+      "currentSha": "df97793d1889776ec2f324faef69ad9d5967e163"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/layout.tsx",
+      "baselineSha": "a3fdd79103bc0e0ccfe81afa2b6a8ecaa684a1e6",
+      "currentSha": "5454042d61873b418fb355aa8cf6f9e4d27420c0"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/app/movers/page.tsx",
+      "baselineSha": "a47d107f73087154c251b073ee731427ec3045f4",
+      "currentSha": "3d735f6dede395e9e927d10574f86042eb9f6d1e"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/app/strategies/page.tsx",
+      "baselineSha": null,
+      "currentSha": "04029fff52b062020c3d09ac824ec8ddcee1bab8"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/briefing/BriefingView.tsx",
+      "baselineSha": "0786adf5481b648b1d1416fe956714b2f39db219",
+      "currentSha": "5140a58350345092c73157b13f9ac14547787665"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/dashboard/AddStockDialog.tsx",
+      "baselineSha": "5a5680a8bf2561d978d4709e776307148d943984",
+      "currentSha": "e136473cd1dda74c47b554b3c1d606253e9904be"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/dashboard/Dashboard.tsx",
+      "baselineSha": "33c595fe4616c6f7f25dc83e9e22c7b75244bd30",
+      "currentSha": "b755585b3a397c81360494596077000727e9eec0"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/dashboard/IndicesStrip.tsx",
+      "baselineSha": "30f34ca29e167274d28734a10710051ccd79e9cf",
+      "currentSha": "3723a597a1ddaaab3e502effb26daaead30ed3d6"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/components/dashboard/MarketOverview.tsx",
+      "baselineSha": null,
+      "currentSha": "29ddd129ccd8b6bd3ca141c2a5b4a6111b5ce709"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/dashboard/Navbar.tsx",
+      "baselineSha": "8ebf9634686cb2c92f217ee14fe287e919b36642",
+      "currentSha": "3baf1194c486c2f69c35fe04edc39f057285651e"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/dashboard/SidePanel.tsx",
+      "baselineSha": "0e6708bb1a94dd5907f445a32ca76b72e16facfe",
+      "currentSha": "e819f7fc4cfda0fceb3ccac598008c67ac0eedb6"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/dashboard/WatchlistTable.tsx",
+      "baselineSha": "de7f2cfa6edf6acd81a021de5f07716ef6e27e95",
+      "currentSha": "5616b3046461e7f3281209c164363d2aac905566"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/design/TickerBar.tsx",
+      "baselineSha": "c6c145c8c3d724b70c91bd00336c954a87b094d4",
+      "currentSha": "aa925d719146d895a12b90fcd55ff717559097d3"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/movers/MoversView.tsx",
+      "baselineSha": "448aa6138731bf670a705cb0ce8e29c07aca3a10",
+      "currentSha": "f99d2d09ff6274fd9cab6ae0599385bcb99b6d4b"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/settings/SettingsView.tsx",
+      "baselineSha": "7f233ebd5851e7cf6c9314aa50a99c6fe82412b7",
+      "currentSha": "4d618ff73863a592acbc8069c244be56a9c20e65"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/stock/ChartCard.tsx",
+      "baselineSha": "2d30444b5b0959394db60efbb9c0944fec9a43c4",
+      "currentSha": "a1186d0a5e029b452c71e75bb61061c8e88f7c3c"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/stock/RightTabs.tsx",
+      "baselineSha": "07359df2272590caf2f7c00b81bd27df4fe6661a",
+      "currentSha": "55c893e2ad71846705c20275bfae35c22735cf9a"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/stock/StockDetailView.tsx",
+      "baselineSha": "9416ed9fffdaad80ade07d294a169d484e9ee9df",
+      "currentSha": "ad7cfaeb64453b96b2836dd6e6b650cadaf0a23f"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/components/stock/StockHeader.tsx",
+      "baselineSha": "d97f81b9259eb7c59a0393952a3c10ee22163d10",
+      "currentSha": "cc1a2482d5f9d6f416eef92ed1721ac00ae69e5c"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/components/strategies/StrategyScanner.tsx",
+      "baselineSha": null,
+      "currentSha": "96cf8d5a5597e634b3002e756c20420ea5f1df71"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/__tests__/analysis-disabled.test.ts",
+      "baselineSha": null,
+      "currentSha": "0fcaf174c844a31ac698f0c15156c458aeee0ce5"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/__tests__/finnhub-quote.test.ts",
+      "baselineSha": null,
+      "currentSha": "27c6f02ab5f59ae8a86e3db0837961aa2427788a"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/__tests__/market-data.test.ts",
+      "baselineSha": null,
+      "currentSha": "7f63c5a27fd8d7eff2d4604f401db24315591237"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/__tests__/query-keys.test.ts",
+      "baselineSha": null,
+      "currentSha": "d3a229e1da2c2420f5027cbb5edb350088551cdf"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/__tests__/strategies.test.ts",
+      "baselineSha": null,
+      "currentSha": "bddcdb3a11745014255cc56317f397e0c64b7b8c"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/__tests__/watchlist-store.test.ts",
+      "baselineSha": null,
+      "currentSha": "14320c23a9bd78ad21babd588fb44340c60fc933"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/lib/api/finnhub.ts",
+      "baselineSha": "aabcfc705ec0f916a8732e9a6b05f35074cd7807",
+      "currentSha": "27458249bd15bb8760c2345ef7679b686c9dd56a"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/data-service.ts",
+      "baselineSha": null,
+      "currentSha": "7fe0fa66802bb4d0922b67aea11f7481ce6a2ae2"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/market-data.ts",
+      "baselineSha": null,
+      "currentSha": "7466847e6591d2541b3cc3b7685f377a786504cf"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/query-keys.ts",
+      "baselineSha": null,
+      "currentSha": "5efaabf9bd2eec8492b0ba8c289d4582aa037684"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/strategies.ts",
+      "baselineSha": null,
+      "currentSha": "de1bd98eb815ba67fe4626d7984c54ee456d77dd"
+    },
+    {
+      "kind": "addition",
+      "path": "projects/market-dashboard/src/lib/watchlist-store.ts",
+      "baselineSha": null,
+      "currentSha": "ad0cb5d1a3d931bc35d0796003cf9bb42211a8fb"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/lib/watchlist.ts",
+      "baselineSha": "7f3cd5e5b7409d6e7e3e991a1ada616974e64aaa",
+      "currentSha": "8d5cf8a2340e8fe68e258ab73c4a7b3231049552"
+    },
+    {
+      "kind": "modification",
+      "path": "projects/market-dashboard/src/types/index.ts",
+      "baselineSha": "abfaeee8af3b40ddd2d5db5878c3fd8dc5e99f4c",
+      "currentSha": "acec35381965266a8a3d88069f43716ec50c9bb4"
+    }
+  ]
+}

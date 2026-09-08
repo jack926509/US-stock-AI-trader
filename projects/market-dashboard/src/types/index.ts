@@ -9,13 +9,18 @@ export interface Quote {
   changePercentage: number
   dayLow: number
   dayHigh: number
-  yearHigh: number
-  yearLow: number
-  marketCap: number
+  yearHigh: number | null
+  yearLow: number | null
+  marketCap: number | null
   open: number
   previousClose: number
   pe?: number
   exchange: string
+  volume?: number
+  averageVolume20?: number
+  asOf?: string | null
+  source?: string
+  freshness?: "live" | "delayed" | "stale"
 }
 
 export interface Profile {
@@ -34,7 +39,7 @@ export interface Profile {
   country: string
 }
 
-// 追蹤清單（localStorage 持久化）
+// 追蹤清單（本機 Node server 私有檔案持久化）
 export interface WatchlistItem {
   symbol: string
   name: string

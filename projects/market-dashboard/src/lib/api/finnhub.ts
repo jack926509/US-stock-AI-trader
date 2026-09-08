@@ -107,15 +107,15 @@ function cached<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
 
 // ─── Raw response shapes ─────────────────────────────────────────────────────
 
-interface FinnhubQuoteRaw {
-  c: number // current price
-  d: number // change
-  dp: number // change percent
-  h: number // day high
-  l: number // day low
-  o: number // open
-  pc: number // previous close
-  t: number // timestamp
+export interface FinnhubQuoteRaw {
+  c: number | null // current price
+  d: number | null // change
+  dp: number | null // change percent
+  h: number | null // day high
+  l: number | null // day low
+  o: number | null // open
+  pc: number | null // previous close
+  t: number | null // timestamp
 }
 
 interface FinnhubProfileRaw {
@@ -176,32 +176,56 @@ export async function getQuote(symbol: string): Promise<Quote | null> {
     if (profileRes.status === "rejected") logError("getQuote/profile", symbol, profileRes.reason)
 
     const quote = quoteRes.status === "fulfilled" ? quoteRes.value : null
-    if (!quote?.c) return null
-
     const metric = metricRes.status === "fulfilled" ? metricRes.value?.metric : null
     const profile = profileRes.status === "fulfilled" ? profileRes.value : null
-
-    return {
-      symbol,
-      name: profile?.name ?? symbol,
-      logo: profile?.logo || undefined,
-      price: quote.c,
-      change: quote.d,
-      changePercentage: quote.dp,
-      dayLow: quote.l,
-      dayHigh: quote.h,
-      yearHigh: Number(metric?.["52WeekHigh"] ?? 0),
-      yearLow: Number(metric?.["52WeekLow"] ?? 0),
-      marketCap: profile?.marketCapitalization ? profile.marketCapitalization * 1_000_000 : 0,
-      open: quote.o,
-      previousClose: quote.pc,
-      pe: Number(metric?.peTTM ?? metric?.peAnnual ?? 0) || undefined,
-      exchange: profile?.exchange ?? "",
-    }
+    return normalizeFinnhubQuote(symbol, quote, metric, profile)
   } catch (err) {
     logError("getQuote", symbol, err)
     return null
   }
+}
+
+function validNumber(value: unknown, positive = false): number | null {
+  if (value == null || value === "") return null
+  const number = Number(value)
+  return Number.isFinite(number) && (!positive || number > 0) ? number : null
+}
+
+export function normalizeFinnhubQuote(symbol: string, quote: FinnhubQuoteRaw | null, metric?: Record<string, number | null | undefined> | null, profile?: FinnhubProfileRaw | null, now = new Date()): Quote | null {
+  const price = validNumber(quote?.c, true)
+  const previousClose = validNumber(quote?.pc, true)
+  const dayHigh = validNumber(quote?.h, true)
+  const dayLow = validNumber(quote?.l, true)
+  const open = validNumber(quote?.o, true)
+  const timestamp = validNumber(quote?.t, true)
+  if (price == null || previousClose == null || dayHigh == null || dayLow == null || open == null || timestamp == null) return null
+  const reportedChange = validNumber(quote?.d)
+  const reportedPercentage = validNumber(quote?.dp)
+  const change = reportedChange ?? price - previousClose
+  const changePercentage = reportedPercentage ?? (change / previousClose) * 100
+  const ageMs = now.getTime() - timestamp * 1000
+  if (!Number.isFinite(ageMs) || ageMs < -5 * 60 * 1000) return null
+  const freshness = ageMs <= 15 * 60 * 1000 ? "live" : ageMs <= 7 * 86_400_000 ? "delayed" : "stale"
+  return {
+      symbol,
+      name: profile?.name ?? symbol,
+      logo: profile?.logo || undefined,
+      price,
+      change,
+      changePercentage,
+      dayLow,
+      dayHigh,
+      yearHigh: validNumber(metric?.["52WeekHigh"], true),
+      yearLow: validNumber(metric?.["52WeekLow"], true),
+      marketCap: validNumber(profile?.marketCapitalization, true) == null ? null : validNumber(profile?.marketCapitalization, true)! * 1_000_000,
+      open,
+      previousClose,
+      pe: validNumber(metric?.peTTM ?? metric?.peAnnual, true) ?? undefined,
+      exchange: profile?.exchange ?? "",
+      asOf: new Date(timestamp * 1000).toISOString(),
+      source: "Finnhub",
+      freshness,
+    }
 }
 
 // ─── Profile ─────────────────────────────────────────────────────────────────
@@ -301,27 +325,28 @@ export async function getQuotes(symbols: string[]): Promise<Quote[]> {
 export interface FinancialSnapshot {
   symbol: string
   // 估值
-  peTTM: number
-  peAnnual: number
-  pbAnnual: number
-  psTTM: number
+  peTTM: number | null
+  peAnnual: number | null
+  pbAnnual: number | null
+  psTTM: number | null
   // 獲利能力
-  roeTTM: number
-  roaTTM: number
-  netMarginTTM: number
-  grossMarginTTM: number
+  roeTTM: number | null
+  roaTTM: number | null
+  netMarginTTM: number | null
+  grossMarginTTM: number | null
   // 財務健康
-  debtToEquity: number
-  currentRatio: number
+  debtToEquity: number | null
+  currentRatio: number | null
   // 成長
-  revenueGrowth3Y: number
-  epsGrowth3Y: number
+  revenueGrowth3Y: number | null
+  epsGrowth3Y: number | null
   // 規模
-  marketCap: number
+  marketCap: number | null
   // 區間
-  week52High: number
-  week52Low: number
-  dividendYield: number
+  week52High: number | null
+  week52Low: number | null
+  dividendYield: number | null
+  nextEarningsDate: string | null
 }
 
 // ─── 公司新聞 ────────────────────────────────────────────────────────────────
@@ -397,9 +422,9 @@ export async function getFinancialSnapshot(symbol: string): Promise<FinancialSna
     const m = data?.metric
     if (!m) return null
 
-    const n = (v: unknown) => {
+    const n = (v: unknown): number | null => {
       const x = Number(v)
-      return v != null && !isNaN(x) && isFinite(x) ? x : 0
+      return v != null && v !== "" && !isNaN(x) && isFinite(x) ? x : null
     }
 
     return {
@@ -410,19 +435,29 @@ export async function getFinancialSnapshot(symbol: string): Promise<FinancialSna
       psTTM: n(m.psTTM),
       roeTTM: n(m.roeTTM),
       roaTTM: n(m.roaTTM),
-      netMarginTTM: n(m.netMarginTTM),
+      netMarginTTM: n(m.netProfitMarginTTM),
       grossMarginTTM: n(m.grossMarginTTM),
       debtToEquity: n(m["totalDebt/totalEquityAnnual"]),
       currentRatio: n(m.currentRatioAnnual),
       revenueGrowth3Y: n(m.revenueGrowth3Y),
       epsGrowth3Y: n(m.epsGrowth3Y),
-      marketCap: n(m.marketCapitalization) * 1_000_000,
+      marketCap: n(m.marketCapitalization) == null ? null : n(m.marketCapitalization)! * 1_000_000,
       week52High: n(m["52WeekHigh"]),
       week52Low: n(m["52WeekLow"]),
       dividendYield: n(m.currentDividendYieldTTM),
+      nextEarningsDate: await getNextEarningsDate(symbol),
     }
   } catch (err) {
     logError("getFinancialSnapshot", symbol, err)
     return null
   }
+}
+
+interface FinnhubEarningsCalendarRaw { earningsCalendar?: Array<{ date?: string; symbol?: string }> }
+export async function getNextEarningsDate(symbol: string): Promise<string | null> {
+  try {
+    const from = new Date(); const to = new Date(from.getTime() + 120 * 86_400_000)
+    const data = await finnhubGet<FinnhubEarningsCalendarRaw>("/calendar/earnings", { symbol, from: isoDate(from), to: isoDate(to) })
+    return data.earningsCalendar?.map((item) => item.date).filter((date): date is string => Boolean(date)).sort()[0] ?? null
+  } catch (error) { logError("getNextEarningsDate", symbol, error); return null }
 }

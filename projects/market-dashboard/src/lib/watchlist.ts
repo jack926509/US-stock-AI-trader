@@ -1,92 +1,37 @@
-// 追蹤清單 — localStorage 唯一持久化（與 portfolio.ts 同模式）
-// 個人單機使用，跨裝置不同步可接受。
-
 import type { WatchlistItem } from "@/types"
 
-const KEY = "watchlist_v1"
-const SERVER_SNAPSHOT = "[]"
+const LEGACY_KEY = "watchlist_v1"
 
-const listeners = new Set<() => void>()
-let cachedSnapshot = SERVER_SNAPSHOT
-let cacheValid = false
-
-function readRaw(): string {
-  if (typeof window === "undefined") return SERVER_SNAPSHOT
-  return window.localStorage.getItem(KEY) ?? SERVER_SNAPSHOT
+async function responseJson(response: Response): Promise<WatchlistItem[]> {
+  const body = await response.json().catch(() => null)
+  if (!response.ok) throw new Error(body?.error ?? `HTTP ${response.status}`)
+  return Array.isArray(body) ? body : []
 }
 
-export function getSnapshot(): string {
-  if (typeof window === "undefined") return SERVER_SNAPSHOT
-  if (!cacheValid) {
-    cachedSnapshot = readRaw()
-    cacheValid = true
-  }
-  return cachedSnapshot
+export async function getWatchlist(): Promise<WatchlistItem[]> {
+  return responseJson(await fetch("/api/watchlist", { cache: "no-store" }))
 }
 
-export function getServerSnapshot(): string {
-  return SERVER_SNAPSHOT
+export async function setWatchlist(items: WatchlistItem[]): Promise<WatchlistItem[]> {
+  return responseJson(await fetch("/api/watchlist", {
+    method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(items),
+  }))
 }
 
-export function subscribe(callback: () => void): () => void {
-  listeners.add(callback)
-  const onStorage = (e: StorageEvent) => {
-    if (e.key === KEY) {
-      cacheValid = false
-      listeners.forEach((cb) => cb())
-    }
-  }
-  if (typeof window !== "undefined") {
-    window.addEventListener("storage", onStorage)
-  }
-  return () => {
-    listeners.delete(callback)
-    if (typeof window !== "undefined") {
-      window.removeEventListener("storage", onStorage)
-    }
-  }
+async function mutate(operation: "add" | "remove" | "migrate", payload: unknown): Promise<WatchlistItem[]> {
+  return responseJson(await fetch("/api/watchlist", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ operation, payload }) }))
+}
+export const addWatchlistItem = (item: Omit<WatchlistItem, "addedAt"> & { addedAt?: string }) => mutate("add", { ...item, addedAt: item.addedAt ?? new Date().toISOString() })
+export const removeWatchlistItem = (symbol: string) => mutate("remove", symbol)
+export const migrateLegacyWatchlist = (items: unknown[]) => mutate("migrate", items)
+
+export function readLegacyWatchlist(): unknown[] | null {
+  if (typeof window === "undefined") return null
+  const raw = window.localStorage.getItem(LEGACY_KEY)
+  if (!raw) return null
+  try { const parsed = JSON.parse(raw); return Array.isArray(parsed) ? parsed : null } catch { return null }
 }
 
-export function parseWatchlist(snapshot: string): WatchlistItem[] {
-  try {
-    const parsed = JSON.parse(snapshot)
-    if (!Array.isArray(parsed)) return []
-    return parsed.filter(
-      (w): w is WatchlistItem =>
-        w &&
-        typeof w.symbol === "string" &&
-        typeof w.name === "string" &&
-        typeof w.addedAt === "string"
-    )
-  } catch {
-    return []
-  }
-}
-
-export function getWatchlist(): WatchlistItem[] {
-  return parseWatchlist(getSnapshot())
-}
-
-export function setWatchlist(list: WatchlistItem[]): void {
-  if (typeof window === "undefined") return
-  cachedSnapshot = JSON.stringify(list)
-  cacheValid = true
-  window.localStorage.setItem(KEY, cachedSnapshot)
-  listeners.forEach((cb) => cb())
-}
-
-export function addToWatchlist(item: Omit<WatchlistItem, "addedAt">): WatchlistItem[] {
-  const current = getWatchlist()
-  const upper = item.symbol.toUpperCase()
-  if (current.find((w) => w.symbol === upper)) return current
-  const next = [...current, { ...item, symbol: upper, addedAt: new Date().toISOString() }]
-  setWatchlist(next)
-  return next
-}
-
-export function removeFromWatchlist(symbol: string): WatchlistItem[] {
-  const upper = symbol.toUpperCase()
-  const next = getWatchlist().filter((w) => w.symbol !== upper)
-  setWatchlist(next)
-  return next
+export function clearLegacyWatchlist(): void {
+  if (typeof window !== "undefined") window.localStorage.removeItem(LEGACY_KEY)
 }

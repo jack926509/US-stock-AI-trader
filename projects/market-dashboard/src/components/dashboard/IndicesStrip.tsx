@@ -1,18 +1,13 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import { Sparkline } from "@/components/design/Sparkline"
-import { changeColor, makeSpark } from "@/lib/format"
+import { changeColor } from "@/lib/format"
 import type { Quote } from "@/types"
-
-function symbolSeed(s: string): number {
-  return [...s].reduce((a, c) => a + c.charCodeAt(0), 0)
-}
+import { MARKET_QUERY_KEYS } from "@/lib/query-keys"
 
 function IndexCard({ quote, isLast }: { quote: Quote; isLast: boolean }) {
   const up = quote.changePercentage >= 0
   const color = changeColor(quote.changePercentage)
-  const points = makeSpark(symbolSeed(quote.symbol), quote.changePercentage > 0 ? 0.4 : -0.4, 0.018)
 
   return (
     <div
@@ -46,9 +41,7 @@ function IndexCard({ quote, isLast }: { quote: Quote; isLast: boolean }) {
           </span>
         </div>
       </div>
-      <div className="self-center">
-        <Sparkline points={points} color={color} width={130} height={44} fill />
-      </div>
+      <div className="self-center text-right font-mono text-[9px] text-muted-foreground">{quote.source}<br />{quote.asOf ?? "無資料"}</div>
     </div>
   )
 }
@@ -72,8 +65,8 @@ function IndexCardSkeleton({ isLast }: { isLast: boolean }) {
 
 export function IndicesStrip() {
   const { data, isLoading } = useQuery<Quote[]>({
-    queryKey: ["market-indices"],
-    queryFn: () => fetch("/api/market").then((r) => r.json()),
+    queryKey: MARKET_QUERY_KEYS.eodOverview,
+    queryFn: () => fetch("/api/overview").then((r) => r.json()).then((value) => value.indices),
     staleTime: 60 * 1000,
     refetchInterval: 60 * 1000,
   })

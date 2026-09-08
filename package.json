@@ -5,11 +5,12 @@
   "description": "美股策略研究專案：市場報告、個股研究、看板與交易架構原始碼整併",
   "engines": { "node": ">=20" },
   "scripts": {
-    "start": "node scripts/project-status.mjs",
-    "dev": "node scripts/project-status.mjs",
+    "start": "node scripts/run-dashboard.mjs start",
+    "dev": "node scripts/run-dashboard.mjs dev",
     "status": "node scripts/project-status.mjs",
     "features": "node scripts/features.mjs",
     "verify": "node scripts/verify-sources.mjs",
-    "test": "node scripts/verify-sources.mjs"
+    "test": "npm --prefix projects/market-dashboard test && node scripts/verify-sources.mjs",
+    "build": "npm --prefix projects/market-dashboard run build"
   }
 }

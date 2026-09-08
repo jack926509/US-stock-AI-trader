@@ -1,4 +1,5 @@
-import { getPeers, getQuotes, getProfile } from "@/lib/api/finnhub"
+import { getPeers, getProfile } from "@/lib/api/finnhub"
+import { getUnifiedQuotes } from "@/lib/data-service"
 import { cacheHeaders, handleApiError, jsonOk, normalizeSymbol } from "@/lib/api/response"
 
 export async function GET(_req: Request, { params }: { params: Promise<{ symbol: string }> }) {
@@ -10,7 +11,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ symbol:
 
     // 抓報價與簡介，給前端做 mini table
     const [quotes, ...profiles] = await Promise.all([
-      getQuotes(peers),
+      getUnifiedQuotes(peers),
       ...peers.map((s) => getProfile(s)),
     ])
     const quoteMap = new Map(quotes.map((q) => [q.symbol, q]))

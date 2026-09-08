@@ -10,15 +10,15 @@ interface SidePanelProps {
   data: WatchlistEntry[]
 }
 
-// 黑卡 AI Brief — v2 設計的右欄主視覺
+// 黑卡確定性摘要 — 僅陳述實際漲跌，不生成投資評級
 export function SidePanel({ data }: SidePanelProps) {
   const withQuotes = data.filter(
     (d): d is WatchlistEntry & { quote: Quote } => d.quote !== null,
   )
 
-  const buys = withQuotes.filter((d) => d.quote.changePercentage >= 1.5).length
-  const sells = withQuotes.filter((d) => d.quote.changePercentage <= -1.5).length
-  const holds = withQuotes.length - buys - sells
+  const advances = withQuotes.filter((d) => d.quote.changePercentage > 0).length
+  const declines = withQuotes.filter((d) => d.quote.changePercentage < 0).length
+  const unchanged = withQuotes.length - advances - declines
 
   const topGainer = [...withQuotes]
     .sort((a, b) => b.quote.changePercentage - a.quote.changePercentage)[0]
@@ -36,7 +36,7 @@ export function SidePanel({ data }: SidePanelProps) {
       `表現最弱 ${topLoser.symbol}（${topLoser.quote.changePercentage.toFixed(2)}%）`,
     )
   }
-  briefLines.push(`追蹤清單共 ${data.length} 檔，買訊 ${buys} / 持有 ${holds} / 賣訊 ${sells}。`)
+  briefLines.push(`追蹤清單共 ${data.length} 檔，上漲 ${advances} / 平盤 ${unchanged} / 下跌 ${declines}。`)
 
   const brief = briefLines.join("，") + "。"
 
@@ -47,7 +47,7 @@ export function SidePanel({ data }: SidePanelProps) {
     <section className="relative overflow-hidden rounded-xl bg-ink p-[18px] text-ink-foreground">
       <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-brand">
         <span className="size-1.5 animate-dot-pulse rounded-full bg-brand shadow-[0_0_8px] shadow-brand" />
-        AI BRIEF · CLAUDE 4.6
+        RULE-BASED · 無 AI
       </div>
       <h3 className="mb-1 mt-2 font-serif text-lg font-semibold tracking-tight">今日投組摘要</h3>
       <div className="font-mono text-[10px] text-white/50">
@@ -61,16 +61,14 @@ export function SidePanel({ data }: SidePanelProps) {
       </div>
       <p className="mt-3 text-[12.5px] leading-relaxed text-white/90">
         {brief}{" "}
-        <span className="font-bold text-brand">
-          打開個股頁可由 Claude Sonnet 4.6 給出完整分析報告。
-        </span>
+        <span className="font-bold text-brand">打開個股頁可查看四種可解釋策略條件。</span>
       </p>
 
       <div className="mt-3.5 grid grid-cols-3 gap-2.5">
         {[
-          { l: "BUY", v: buys, c: "text-up-neon" },
-          { l: "HOLD", v: holds, c: "text-white/70" },
-          { l: "SELL", v: sells, c: "text-down-neon" },
+          { l: "上漲", v: advances, c: "text-up-neon" },
+          { l: "平盤", v: unchanged, c: "text-white/70" },
+          { l: "下跌", v: declines, c: "text-down-neon" },
         ].map((k) => (
           <div
             key={k.l}
